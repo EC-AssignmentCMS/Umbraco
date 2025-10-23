@@ -1,0 +1,124 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --font: 'poppins', 'Times New Roman', Times, serif;
+    --main-color: #4F5955;
+    --sub-color-1: #F2EDDC;
+    --sub-color-2: #D9C3A9;
+    --note-1-color: #9C9EA6;
+    --body-text-color: #535656;
+    --profile-card-border: #EAEAEA;
+    --footer-bg: #0E0E0E;
+    --swedbank: #2D303A;
+    --w-light: 300;
+    --w-medium: 500;
+    --w-semibold: 600;
+    --w-bold: 700;
+    --extension-title-size: 4.375em;
+    --extension-title-weight: var(--w-bold);
+    --heading-01-size: 3.125em;
+    --heading-01-weight: var(--w-bold);
+    --heading-01-line-height: 3.75em;
+    --heading-02-size: 2.5em;
+    --heading-02-weight: var(--w-bold);
+    --heading-02-line-height: 3.125em;
+    --heading-03-size: 1.875em;
+    --heading-03-weight: var(--w-bold);
+    --heading-04-size: 1.5625em;
+    --heading-04-weight: var(--w-bold);
+    --heading-05-size: 1.375em;
+    --heading-05-weight: var(--w-semibold);
+    --heading-06-size: 1.125em;
+    --heading-06-weight: var(--w-bold);
+    --body-text-size: 0.875em;
+    --body-text-line-height: 1.5em;
+    --note-1-size: 0.8125em;
+    --note-2-size: 0.8125em;
+    --note-2-weight: var(--w-semibold);
+    --label-size: 0.875em;
+    --label-weight: var(--w-bold);
+    --sub-title-1-size: 1.125em;
+    --sub-title-1-weight: var(--w-medium);
+    --sub-title-2-size: 1em;
+    --sub-title-2-weight: var(--w-bold);
+    --sub-title-3-size: 1em;
+    --sub-title-3-weight: var(--w-medium);
+    --sub-title-4-size: 0.875em;
+    --sub-title-4-weight: var(--w-semibold);
+    --slide-text-size: 1em;
+    --quote-size: 1.25em;
+    --quote-weight: var(--w-light);
+    --nav-drop-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.1);
+    --req-card-drop-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.102);
+    --letus-card-drop-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.102);
+}
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    font-weight: 400;
+    font-style: normal;
+    font-family: var(--font);
+/*    color: var(--text-color);
+    background-color: var(--background-color);*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 600;
+/*    color: var(--headline-color);*/
+}
+
+p {
+    margin: 0;
+/*    color: var(--text-color);*/
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.visuallyHidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+/* Buttons */
+button {
+    all: unset;
+}
+
+/* A-tags Links  */
+a {
+    all: unset;
+    font-family: var(--font);
+    cursor: pointer;
+}
