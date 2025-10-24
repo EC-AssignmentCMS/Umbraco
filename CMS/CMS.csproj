@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Partials\blocklist\Components\" />
+    <Folder Include="wwwroot\fontAwesome\" />
   </ItemGroup>
 
   <PropertyGroup>

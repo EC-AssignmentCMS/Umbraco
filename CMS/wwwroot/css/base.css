@@ -53,6 +53,26 @@
     --letus-card-drop-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.102);
 }
 
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 900;
+    src: url("/fontAwesome/webfonts/fa-solid-900.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fontAwesome/webfonts/fa-regular-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fontAwesome/webfonts/fa-brands-400.woff2") format("woff2");
+}
 
 *,
 *::before,
@@ -121,4 +141,15 @@ a {
     all: unset;
     font-family: var(--font);
     cursor: pointer;
+}
+
+.facebook::before {
+    content: "\f09a"; /* Unicode för fa-facebook */
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+    display: inline-block;
+    margin-right: 0.4em;
+    font-size: 1em; /* anpassa om du vill */
+    line-height: 1;
+    vertical-align: middle;
 }
