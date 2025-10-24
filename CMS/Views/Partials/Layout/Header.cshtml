@@ -8,30 +8,36 @@
         .FirstOrDefault();
 
     var social = siteSettings?.SocialMediaPlatformList ?? Enumerable.Empty<BlockListItem>();
+    var address = siteSettings?.Address ?? "No address found.";
+    var logoImg = siteSettings?.LogoImage;
 }
 
 <header>
-    <nav>
-        <a class="addressLink" href="#"></a>
-        <div class="socialMediaContainer">
+    <nav class="top-nav">
+        <a class="address-link" href="https://www.google.com/maps/search/@address" target="_blank">@address</a>
+
+        <div class="social-media-container">
             <a href="#" class="facebook">Facebook</a>
         </div>
     </nav>
-    <div class="bottomHeader">
-        <div class="logoContainer">
-            <img src="#" alt="Alternate Text" />
+    <div class="bottom-header">
+        <div class="logo-container">
+            @if (logoImg != null)
+            {
+                <img src="@logoImg.Url()" alt="@logoImg.Name" />
+            }
         </div>
-        <nav>
-            <ul class="mainNavigation">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about-us">About Us</a></li>
-                <li><a href="/services">Services</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
+
+        <nav class="main-navigation">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/services">Services</a>
+            <a href="/projects">Projects</a>
+            <a href="/contact">Contact</a>
         </nav>
 
-        <div class="searchContainer">
-        
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
         </div>
     </div>
 </header>
