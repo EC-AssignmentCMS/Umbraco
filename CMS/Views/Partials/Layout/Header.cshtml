@@ -1,0 +1,37 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.Blocks
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var siteSettings = Umbraco.ContentAtRoot()
+        .DescendantsOrSelf<SiteSettings>()
+        .FirstOrDefault();
+
+    var social = siteSettings?.SocialMediaPlatformList ?? Enumerable.Empty<BlockListItem>();
+}
+
+<header>
+    <nav>
+        <a class="addressLink" href="#"></a>
+        <div class="socialMediaContainer">
+            <a href="#" class="facebook">Facebook</a>
+        </div>
+    </nav>
+    <div class="bottomHeader">
+        <div class="logoContainer">
+            <img src="#" alt="Alternate Text" />
+        </div>
+        <nav>
+            <ul class="mainNavigation">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="searchContainer">
+        
+        </div>
+    </div>
+</header>
