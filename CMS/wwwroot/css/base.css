@@ -3,8 +3,11 @@
 :root {
     --font: 'poppins', 'Times New Roman', Times, serif;
     --main-color: #4F5955;
+    --main-color-opacity: #4f5955e3;
+    --main-color-dark: #48514d;
     --sub-color-1: #F2EDDC;
-    --sub-color-2: #D9C3A9;
+/*    --sub-color-2: #D9C3A9;*/
+    --sub-color-3: #D9C3A9;
     --note-1-color: #9C9EA6;
     --body-text-color: #535656;
     --profile-card-border: #EAEAEA;
@@ -51,6 +54,8 @@
     --nav-drop-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.1);
     --req-card-drop-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.102);
     --letus-card-drop-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.102);
+    /*    --responsive-padding:0 clamp(1rem, 20vw, 23.5rem);*/
+    --pad-responsive-inline: clamp( 1rem, calc( 1rem + (23.5rem - 1rem) * ((100vw - 380px) / (1920px - 380px)) ), 23.5rem );
 }
 
 @font-face {
@@ -80,15 +85,17 @@
     box-sizing: border-box;
 }
 
-
-html,
 body {
+    display: flex; 
+    flex-direction:column;
     margin: 0;
     padding: 0;
     font-size: 1em;
     font-weight: 400;
     font-style: normal;
     font-family: var(--font);
+    min-height: 100vh;
+    min-height: 100dvh;
 /*    color: var(--text-color);
     background-color: var(--background-color);*/
 }
@@ -120,7 +127,7 @@ p {
     border-width: 0;
 }
 
-.visuallyHidden {
+.visually-hidden {
     position: absolute;
     overflow: hidden;
     clip: rect(0 0 0 0);
@@ -143,13 +150,87 @@ a {
     cursor: pointer;
 }
 
-.facebook::before {
-    content: "\f09a"; /* Unicode för fa-facebook */
-    font-family: "Font Awesome 6 Brands";
+.address-link{
+    color: white;
+    font-size: var(--note-1-size)
+}
+
+.main-navigation > a {
+    color: var(--main-color);
+    font-size: var(--sub-title-2-size);
+
+    font-weight: var(--sub-title-2-weight);
+
+    &&:hover{
+    color:var(--main-color-opacity);
+    }
+    &&:active {
+        color: var(--main-color-dark);
+    }
+}
+
+
+/*.facebook::before {
+    content: "\f09a";*/ /* Unicode för fa-facebook */
+    /*font-family: "Font Awesome 6 Brands";
     font-weight: 400;
     display: inline-block;
     margin-right: 0.4em;
-    font-size: 1em; /* anpassa om du vill */
-    line-height: 1;
+    font-size: 1em;*/ /* anpassa om du vill */
+    /*line-height: 1;
     vertical-align: middle;
+}*/
+
+
+/*Header*/
+header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.top-nav {
+    display: flex;
+    padding-inline: var(--pad-responsive-inline);
+    background-color: var(--main-color);
+}
+
+.bottom-header {
+    display: flex;
+    align-items: center;
+    padding-inline: var(--pad-responsive-inline);
+}
+
+.search-container > i{
+    color: var(--main-color);
+}
+
+
+/*Main*/
+#main-content{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-inline: var(--pad-responsive-inline);
+}
+
+
+/*Footer*/
+footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-block: .7rem;
+    padding-inline: var(--pad-responsive-inline);
+    background-color: var(--footer-bg   );
+}
+
+.copyright-text {
+    color: var(--main-color);
+    font-size: var(--note-1-size);
+}
+
+.copyright-text .highlight {
+    font-size: var(--body-text-size);
+    color: var(--sub-color-3);
 }
