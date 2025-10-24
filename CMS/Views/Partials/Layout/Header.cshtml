@@ -10,6 +10,7 @@
     var social = siteSettings?.SocialMediaPlatformList ?? Enumerable.Empty<BlockListItem>();
     var address = siteSettings?.Address ?? "No address found.";
     var logoImg = siteSettings?.LogoImage;
+    var socials = new BlockListModel(siteSettings?.Value<IList<BlockListItem>>("socialMediaPlatformList") ?? new List<BlockListItem>());
 }
 
 <header>
@@ -17,7 +18,21 @@
         <a class="address-link" href="https://www.google.com/maps/search/@address" target="_blank">@address</a>
 
         <div class="social-media-container">
-            <a href="#" class="facebook">Facebook</a>
+            @foreach (var item in socials)
+            {
+                var content = item.Content;
+                var platform = content.Value<string>("platformName")?.ToLowerInvariant()?.Trim();
+                var url = content.Value<string>("platformAccountUrl");
+
+                if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(platform))
+                {
+                    <a href="@url"
+                       target="_blank"
+                       rel="noopener"
+                       class="social @platform"
+                       aria-label="@platform"></a>
+                }
+            }
         </div>
     </nav>
     <div class="bottom-header">

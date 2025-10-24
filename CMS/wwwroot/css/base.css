@@ -155,19 +155,50 @@ a {
     font-size: var(--note-1-size)
 }
 
+
+.social-media-container .social::before {
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    font-size: 1em;
+    line-height: 1;
+    transition: color 0.3s;
+    color: white;
+    padding
+}
+
+.social.facebook::before {
+    content: "\f39e";
+}
+
+.social.linkedin::before {
+    content: "\f0e1";
+}
+.social.x::before,
+.social.twitter::before {
+    content: "\e61b";
+}
+
+.social .social:hover::before {
+    color: var(--main-color);
+}
+
 .main-navigation > a {
     color: var(--main-color);
     font-size: var(--sub-title-2-size);
 
     font-weight: var(--sub-title-2-weight);
 
-    &&:hover{
-    color:var(--main-color-opacity);
+
+}
+    .main-navigation > a:hover {
+        color: var(--main-color-opacity);
     }
-    &&:active {
+
+    .main-navigation > a :active {
         color: var(--main-color-dark);
     }
-}
 
 
 /*.facebook::before {
@@ -191,6 +222,7 @@ header{
 
 .top-nav {
     display: flex;
+    justify-content: space-between;
     padding-inline: var(--pad-responsive-inline);
     background-color: var(--main-color);
 }
