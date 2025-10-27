@@ -10,6 +10,7 @@
     --sub-color-3: #D9C3A9;
     --note-1-color: #9C9EA6;
     --body-text-color: #535656;
+    --border-color: #606966;
     --profile-card-border: #EAEAEA;
     --footer-bg: #0E0E0E;
     --swedbank: #2D303A;
@@ -111,9 +112,24 @@ h6 {
 /*    color: var(--headline-color);*/
 }
 
+
+
 p {
     margin: 0;
 /*    color: var(--text-color);*/
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul > li {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
 }
 
 .sr-only {
@@ -150,7 +166,9 @@ a {
     cursor: pointer;
 }
 
-.address-link{
+.address-link {
+    display: flex;
+    align-items: center;
     color: white;
     font-size: var(--note-1-size)
 }
@@ -165,7 +183,6 @@ a {
     line-height: 1;
     transition: color 0.3s;
     color: white;
-    padding
 }
 
 .social.facebook::before {
@@ -180,37 +197,38 @@ a {
     content: "\e61b";
 }
 
-.social .social:hover::before {
-    color: var(--main-color);
+.social:hover::before {
+    color: var(--sub-color-3);
 }
 
-.main-navigation > a {
+.social {
+    padding: .5rem;
+    border-color: var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+    .social:last-child {
+        border-right: 1px solid var(--border-color);
+    }
+
+.nav-link {
     color: var(--main-color);
     font-size: var(--sub-title-2-size);
-
     font-weight: var(--sub-title-2-weight);
-
-
 }
-    .main-navigation > a:hover {
+    .nav-link:hover {
         color: var(--main-color-opacity);
     }
 
-    .main-navigation > a :active {
+    .nav-link :active {
         color: var(--main-color-dark);
     }
 
+.current > .nav-link{
+    color: var(--sub-color-3);
+}
 
-/*.facebook::before {
-    content: "\f09a";*/ /* Unicode för fa-facebook */
-    /*font-family: "Font Awesome 6 Brands";
-    font-weight: 400;
-    display: inline-block;
-    margin-right: 0.4em;
-    font-size: 1em;*/ /* anpassa om du vill */
-    /*line-height: 1;
-    vertical-align: middle;
-}*/
+
 
 
 /*Header*/
@@ -220,20 +238,41 @@ header{
     width: 100%;
 }
 
+
+
 .top-nav {
     display: flex;
+    align-items: stretch;
     justify-content: space-between;
     padding-inline: var(--pad-responsive-inline);
     background-color: var(--main-color);
 }
 
-.bottom-header {
-    display: flex;
-    align-items: center;
-    padding-inline: var(--pad-responsive-inline);
+.social-media-container {
+    display:flex;
+
 }
 
-.search-container > i{
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem var(--pad-responsive-inline);
+
+
+}
+
+.page-navigation {
+    display: flex;
+    gap: 1rem;
+
+    @media (width >=768px) {
+        gap: 4rem;
+    }
+}
+
+
+.search-container > i {
     color: var(--main-color);
 }
 

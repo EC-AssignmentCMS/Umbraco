@@ -1,16 +1,27 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Cms.Core.Models.Blocks
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.PublishedCache
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Cms.Core.Services.Navigation
+@inject IVariationContextAccessor VariationContextAccessor
+@inject IPublishedContentCache PublishedContentCache
+@inject IDocumentNavigationQueryService DocumentNavigationQueryService
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
 
 @{
     var siteSettings = Umbraco.ContentAtRoot()
         .DescendantsOrSelf<SiteSettings>()
         .FirstOrDefault();
 
-    var social = siteSettings?.SocialMediaPlatformList ?? Enumerable.Empty<BlockListItem>();
     var address = siteSettings?.Address ?? "No address found.";
     var logoImg = siteSettings?.LogoImage;
     var socials = new BlockListModel(siteSettings?.Value<IList<BlockListItem>>("socialMediaPlatformList") ?? new List<BlockListItem>());
+
+    var selection = Model.Root().Children().Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
+    
 }
 
 <header>
@@ -35,24 +46,37 @@
             }
         </div>
     </nav>
-    <div class="bottom-header">
-        <div class="logo-container">
+    <nav class="main-navigation">
+
+        <a class="logo-link" aria-label="Home page" href="@Model.Root()?.Url()">
             @if (logoImg != null)
             {
                 <img src="@logoImg.Url()" alt="@logoImg.Name" />
             }
-        </div>
+            else
+            {
+                <span>Onatrix</span>    
+            }
+            
+        </a>
 
-        <nav class="main-navigation">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/services">Services</a>
-            <a href="/projects">Projects</a>
-            <a href="/contact">Contact</a>
-        </nav>
-
+        @if (selection?.Length > 0)
+        {
+            <ul aria-label="Main page navigation" class="page-navigation">
+                @foreach (var item in selection)
+                {
+                    <li  class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">
+                        <a class="nav-link" href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                    </li>
+                }
+            </ul>
+        }
         <div class="search-container">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
-    </div>
+
+    </nav>
+
+
+
 </header>
