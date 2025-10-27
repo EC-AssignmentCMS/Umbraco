@@ -6,9 +6,6 @@ I denna inlämningsuppgift ska du skapa en webbplats i **Umbraco**, baserad på 
 Du får en Figma-design som visar de sidor du ska bygga i Umbraco.  
 Designen behöver inte vara pixelperfekt, men den ska tydligt efterlikna originalet i layout, struktur och innehåll. Bilder kan exporteras direkt från Figma eller hämtas från exempelvis **pexels.com** eller **unsplash.com**.
 
-> **OBS!** En uppdaterad version av designfilen finns tillgänglig.  
-> Se till att ladda ner den senaste innan du börjar arbeta.
-
 Nedan följer kriterierna för respektive betygsnivå. Läs igenom noggrant så du vet vilka krav som gäller för **Godkänt (G)** respektive **Väl godkänt (VG)**.
 
 ---
