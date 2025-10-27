@@ -1,0 +1,82 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.Blocks
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.PublishedCache
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Cms.Core.Services.Navigation
+@inject IVariationContextAccessor VariationContextAccessor
+@inject IPublishedContentCache PublishedContentCache
+@inject IDocumentNavigationQueryService DocumentNavigationQueryService
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{
+    var siteSettings = Umbraco.ContentAtRoot()
+        .DescendantsOrSelf<SiteSettings>()
+        .FirstOrDefault();
+
+    var address = siteSettings?.Address ?? "No address found.";
+    var logoImg = siteSettings?.LogoImage;
+    var socials = new BlockListModel(siteSettings?.Value<IList<BlockListItem>>("socialMediaPlatformList") ?? new List<BlockListItem>());
+
+    var selection = Model.Root().Children().Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
+    
+}
+
+<header>
+    <nav class="top-nav">
+        <a class="address-link" href="https://www.google.com/maps/search/@address" target="_blank">@address</a>
+
+        <div class="social-media-container">
+            @foreach (var item in socials)
+            {
+                var content = item.Content;
+                var platform = content.Value<string>("platformName")?.ToLowerInvariant()?.Trim();
+                var url = content.Value<string>("platformAccountUrl");
+
+                if (!string.IsNullOrWhiteSpace(url) && !string.IsNullOrWhiteSpace(platform))
+                {
+                    <a href="@url"
+                       target="_blank"
+                       rel="noopener"
+                       class="social @platform"
+                       aria-label="@platform"></a>
+                }
+            }
+        </div>
+    </nav>
+    <nav class="main-navigation">
+
+        <a class="logo-link" aria-label="Home page" href="@Model.Root()?.Url()">
+            @if (logoImg != null)
+            {
+                <img src="@logoImg.Url()" alt="@logoImg.Name" />
+            }
+            else
+            {
+                <span>Onatrix</span>    
+            }
+            
+        </a>
+
+        @if (selection?.Length > 0)
+        {
+            <ul aria-label="Main page navigation" class="page-navigation">
+                @foreach (var item in selection)
+                {
+                    <li  class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">
+                        <a class="nav-link" href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                    </li>
+                }
+            </ul>
+        }
+        <div class="search-container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+    </nav>
+
+
+
+</header>

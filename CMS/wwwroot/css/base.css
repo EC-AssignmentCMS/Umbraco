@@ -1,0 +1,307 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --font: 'poppins', 'Times New Roman', Times, serif;
+    --main-color: #4F5955;
+    --main-color-opacity: #4f5955e3;
+    --main-color-dark: #48514d;
+    --sub-color-1: #F2EDDC;
+/*    --sub-color-2: #D9C3A9;*/
+    --sub-color-3: #D9C3A9;
+    --note-1-color: #9C9EA6;
+    --body-text-color: #535656;
+    --border-color: #606966;
+    --profile-card-border: #EAEAEA;
+    --footer-bg: #0E0E0E;
+    --swedbank: #2D303A;
+    --w-light: 300;
+    --w-medium: 500;
+    --w-semibold: 600;
+    --w-bold: 700;
+    --extension-title-size: 4.375em;
+    --extension-title-weight: var(--w-bold);
+    --heading-01-size: 3.125em;
+    --heading-01-weight: var(--w-bold);
+    --heading-01-line-height: 3.75em;
+    --heading-02-size: 2.5em;
+    --heading-02-weight: var(--w-bold);
+    --heading-02-line-height: 3.125em;
+    --heading-03-size: 1.875em;
+    --heading-03-weight: var(--w-bold);
+    --heading-04-size: 1.5625em;
+    --heading-04-weight: var(--w-bold);
+    --heading-05-size: 1.375em;
+    --heading-05-weight: var(--w-semibold);
+    --heading-06-size: 1.125em;
+    --heading-06-weight: var(--w-bold);
+    --body-text-size: 0.875em;
+    --body-text-line-height: 1.5em;
+    --note-1-size: 0.8125em;
+    --note-2-size: 0.8125em;
+    --note-2-weight: var(--w-semibold);
+    --label-size: 0.875em;
+    --label-weight: var(--w-bold);
+    --sub-title-1-size: 1.125em;
+    --sub-title-1-weight: var(--w-medium);
+    --sub-title-2-size: 1em;
+    --sub-title-2-weight: var(--w-bold);
+    --sub-title-3-size: 1em;
+    --sub-title-3-weight: var(--w-medium);
+    --sub-title-4-size: 0.875em;
+    --sub-title-4-weight: var(--w-semibold);
+    --slide-text-size: 1em;
+    --quote-size: 1.25em;
+    --quote-weight: var(--w-light);
+    --nav-drop-shadow: 0 4px 30px 0 rgba(0, 0, 0, 0.1);
+    --req-card-drop-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.102);
+    --letus-card-drop-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.102);
+    /*    --responsive-padding:0 clamp(1rem, 20vw, 23.5rem);*/
+    --pad-responsive-inline: clamp( 1rem, calc( 1rem + (23.5rem - 1rem) * ((100vw - 380px) / (1920px - 380px)) ), 23.5rem );
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 900;
+    src: url("/fontAwesome/webfonts/fa-solid-900.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fontAwesome/webfonts/fa-regular-400.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/fontAwesome/webfonts/fa-brands-400.woff2") format("woff2");
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex; 
+    flex-direction:column;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    font-weight: 400;
+    font-style: normal;
+    font-family: var(--font);
+    min-height: 100vh;
+    min-height: 100dvh;
+/*    color: var(--text-color);
+    background-color: var(--background-color);*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 600;
+/*    color: var(--headline-color);*/
+}
+
+
+
+p {
+    margin: 0;
+/*    color: var(--text-color);*/
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul > li {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+/* Buttons */
+button {
+    all: unset;
+}
+
+/* A-tags Links  */
+a {
+    all: unset;
+    font-family: var(--font);
+    cursor: pointer;
+}
+
+.address-link {
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: var(--note-1-size)
+}
+
+
+.social-media-container .social::before {
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    font-size: 1em;
+    line-height: 1;
+    transition: color 0.3s;
+    color: white;
+}
+
+.social.facebook::before {
+    content: "\f39e";
+}
+
+.social.linkedin::before {
+    content: "\f0e1";
+}
+.social.x::before,
+.social.twitter::before {
+    content: "\e61b";
+}
+
+.social:hover::before {
+    color: var(--sub-color-3);
+}
+
+.social {
+    padding: .5rem;
+    border-color: var(--border-color);
+    border-left: 1px solid var(--border-color);
+}
+
+    .social:last-child {
+        border-right: 1px solid var(--border-color);
+    }
+
+.nav-link {
+    color: var(--main-color);
+    font-size: var(--sub-title-2-size);
+    font-weight: var(--sub-title-2-weight);
+}
+    .nav-link:hover {
+        color: var(--main-color-opacity);
+    }
+
+    .nav-link :active {
+        color: var(--main-color-dark);
+    }
+
+.current > .nav-link{
+    color: var(--sub-color-3);
+}
+
+
+
+
+/*Header*/
+header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+
+.top-nav {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    padding-inline: var(--pad-responsive-inline);
+    background-color: var(--main-color);
+}
+
+.social-media-container {
+    display:flex;
+
+}
+
+.main-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem var(--pad-responsive-inline);
+
+
+}
+
+.page-navigation {
+    display: flex;
+    gap: 1rem;
+
+    @media (width >=768px) {
+        gap: 4rem;
+    }
+}
+
+
+.search-container > i {
+    color: var(--main-color);
+}
+
+
+/*Main*/
+#main-content{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-inline: var(--pad-responsive-inline);
+}
+
+
+/*Footer*/
+footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-block: .7rem;
+    padding-inline: var(--pad-responsive-inline);
+    background-color: var(--footer-bg   );
+}
+
+.copyright-text {
+    color: var(--main-color);
+    font-size: var(--note-1-size);
+}
+
+.copyright-text .highlight {
+    font-size: var(--body-text-size);
+    color: var(--sub-color-3);
+}
