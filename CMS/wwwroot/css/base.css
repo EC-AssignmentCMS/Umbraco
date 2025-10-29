@@ -154,6 +154,10 @@ ul > li {
     border: 0;
 }
 
+figure, figcaption {
+    all: unset;
+}
+
 /* Buttons */
 button {
     all: unset;
@@ -212,6 +216,9 @@ a {
     }
 
 .nav-link {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
     color: var(--main-color);
     font-size: var(--sub-title-2-size);
     font-weight: var(--sub-title-2-weight);
@@ -228,10 +235,55 @@ a {
     color: var(--sub-color-3);
 }
 
+/*Hover animation*/
+.nav-link::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--main-color);
+    transform: translateY(100%);
+    opacity: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    will-change: transform, opacity;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, black 20%, black 80%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, black 20%, black 80%, transparent 100%);
+}
+
+.nav-link:hover::before {
+    animation: rollUp 0.6s ease-out forwards;
+}
+
+@keyframes rollUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translateY(-10%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-link::before {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
 
 
 
-/*Header*/
+
+/*Header start*/
 header{
     display: flex;
     flex-direction: column;
@@ -271,19 +323,139 @@ header{
     }
 }
 
+.bg-img-container{
+    max-width: 100%;
+}
+
 
 .search-container > i {
     color: var(--main-color);
 }
 
+/*Header end*/
+
+
+/*Breadcrumb Banner*/
+.breadcrumb-banner {display: none;}
+
+@media (min-width: 768px) {
+    .breadcrumb-banner {
+        background-image: url('/Images/breadcrumb-bg.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100%;
+        min-height: 245px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+.breadcrumb-banner > h2 {
+    color: var(--main-color);
+    font-size: var(--heading-01-size);
+    font-weight: var(--w-bold);
+}
+
+.breadcrumb{
+    display: flex;
+    gap: .3rem;
+}
+    .breadcrumb li {
+        color: var(--main-color);
+    }
+.breadcrumb > .active{
+    color: var(--sub-color-3);
+}
+
 
 /*Main*/
-#main-content{
+#main-content {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     padding-inline: var(--pad-responsive-inline);
 }
+
+
+
+/*Team Section start*/
+.team-section {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-block: 3rem;
+}
+
+.team-sub-title {
+    color: var(--sub-color-3);
+    font-size: var(--note-1-size);
+    font-weight: var(--w-bold);
+}
+.team-section > .rte h3{
+    color: var(--main-color);
+    font-size: var(--heading-02-size);
+    font-weight: var(--heading-02-weight);
+}
+.team-members{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+
+}
+.featured-team-members {
+    width: 100%;
+    --grid-min-col-size: 370px;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat( auto-fill, minmax(min(var(--grid-min-col-size), 100%), 1fr) );
+    gap: 1rem;
+    margin: 0;
+}
+.other-team-members {
+    width: 100%;
+    --grid-min-col-size: 270px;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: repeat( auto-fill, minmax(min(var(--grid-min-col-size), 100%), 1fr) );
+    gap: 1rem;
+    margin: 0;
+}
+
+
+.team-member-card {
+    border: 1px solid var(--profile-card-border);
+}
+
+    .img-container {
+        max-width: 100%;
+    }
+
+        .img-container > img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+    .team-member-card > figcaption {
+        display: block;
+        padding: 1rem;
+    }
+
+    .team-member-card h5 {
+        color: var(--main-color);
+        font-size: var(--heading-03-size);
+    }
+
+    .team-member-card p {
+        color: var(--note-1-color);
+        font-size: var(--note-1-size);
+    }
+
+/*Team Section End*/
 
 
 /*Footer*/
@@ -293,7 +465,7 @@ footer {
     width: 100%;
     padding-block: .7rem;
     padding-inline: var(--pad-responsive-inline);
-    background-color: var(--footer-bg   );
+    background-color: var(--footer-bg );
 }
 
 .copyright-text {
@@ -301,7 +473,7 @@ footer {
     font-size: var(--note-1-size);
 }
 
-.copyright-text .highlight {
-    font-size: var(--body-text-size);
-    color: var(--sub-color-3);
-}
+    .copyright-text .highlight {
+        font-size: var(--body-text-size);
+        color: var(--sub-color-3);
+    }

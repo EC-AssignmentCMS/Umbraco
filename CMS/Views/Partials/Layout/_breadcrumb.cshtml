@@ -1,0 +1,32 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.PublishedCache
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Cms.Core.Services.Navigation
+@inject IPublishedContentCache PublishedContentCache
+@inject IDocumentNavigationQueryService DocumentNavigationQueryService
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{
+    var selection = Model.Ancestors().ToArray();
+    var heading = (Model.Name?.Trim().ToLowerInvariant()) switch
+    {
+        "about" => "About Us",
+        "services" => "Our Services",
+        "contact" => "Contact Us",
+        _ => Model.Name
+    };
+}
+
+@if (selection?.Length > 0)
+{
+    <div class="breadcrumb-banner">
+        <h2>@heading</h2>
+        <ul class="breadcrumb">
+            @foreach (var item in selection.OrderBy(x => x.Level))
+            {
+                <li><a href="@item.Url(PublishedUrlProvider)">@item.Name</a> <span class="divider">></span></li>
+            }
+            <li class="active">@Model.Name</li>
+        </ul>
+    </div>
+}

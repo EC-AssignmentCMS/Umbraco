@@ -1,38 +1,7 @@
-﻿@using Umbraco.Cms.Core.Models.Blocks
-@using Umbraco.Cms.Web.Common.PublishedModels
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<AboutPage>
 @{
     Layout = "baseLayout.cshtml";
-
-    var sections = Model.Sections ?? BlockListModel.Empty;
-
-    var teamSection = sections
-        .Select(x => x.Content)
-        .OfType<TeamSection>()
-        .FirstOrDefault();
-
-    var members = teamSection?.TeamMemberList ?? BlockListModel.Empty;
 }
 
-<h1>Abooot page</h1>
-
-@if (teamSection != null)
-{
-    <section class="team-section">
-        <h2>@teamSection.TeamLabel</h2>
-        @* @Html.Raw(teamSection.TeamTitle) *@
-
-        <div class="team-members">
-            @foreach (var memberBlock in members)
-            {
-                var member = (TeamMember)memberBlock.Content;
-
-                <div class="team-member">
-                    <img src="@member.TeamMemberImage?.Url()" alt="@member.TeamMemberName" />
-                    <h5>@member.TeamMemberName</h5>
-                    <p>@member.TeamMemberRole</p>
-                </div>
-            }
-        </div>
-    </section>
-}
+<partial name="Partials/Sections/_teamSection" />
