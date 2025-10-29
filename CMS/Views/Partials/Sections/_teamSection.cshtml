@@ -1,0 +1,48 @@
+﻿@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<AboutPage>
+@{
+    var sections = Model.Sections ?? BlockListModel.Empty;
+
+    var teamSection = sections
+        .Select(x => x.Content)
+        .OfType<TeamSection>()
+        .FirstOrDefault();
+
+    var members = teamSection?.TeamMemberList ?? BlockListModel.Empty;
+
+    var memberItems = members.Select(m => (TeamMember)m.Content).ToList();
+    var featured = memberItems.Take(3).ToList();
+    var others = memberItems.Skip(3).ToList();
+}
+
+@if (teamSection != null)
+{
+    <section class="team-section">
+        <h2 class="team-sub-title">@teamSection.TeamLabel</h2>
+        <div class="rte">@Html.Raw(teamSection.TeamTitle)</div>
+
+        <div class="team-members">
+
+            @if (featured.Any())
+            {
+                <div class="featured-team-members">
+                    @foreach (var member in featured)
+                    {
+                        @await Html.PartialAsync("Partials/Shared/_TeamMemberCard", member)
+                    }
+                </div>
+            }
+
+            @if (others.Any())
+            {
+                <div class="other-team-members">
+                    @foreach (var member in others)
+                    {
+                        @await Html.PartialAsync("Partials/Shared/_TeamMemberCard", member)
+                    }
+                </div>
+            }
+        </div>
+    </section>
+}
