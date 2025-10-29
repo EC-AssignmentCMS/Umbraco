@@ -1,0 +1,40 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var siteSettings = Umbraco.ContentAtRoot()
+        .DescendantsOrSelf<SiteSettings>()
+        .FirstOrDefault();
+
+    var address = siteSettings?.Address;
+    var phone = siteSettings?.PhoneNumber;
+    var email = siteSettings?.EMailAddress;
+}
+
+<section class="contact-info">
+    <div class="info-container">
+        <h4>Let us know about your next project</h4>
+
+        <h3>Office location</h3>
+        @if (!string.IsNullOrWhiteSpace(address))
+        {
+            <a href="https://www.google.com/maps/search/@address" target="_blank">@address</a>
+        }
+
+        <h3>Phone number</h3>
+        <p>
+            @if (!string.IsNullOrWhiteSpace(phone))
+            {
+                <a href="tel:@phone">@phone</a>
+            }
+        </p>
+
+        <h3>E-mail address</h3>
+        <p>
+            @if (!string.IsNullOrWhiteSpace(email))
+            {
+                <a href="mailto:@email">@email</a>
+            }
+        </p>
+    </div>
+</section>

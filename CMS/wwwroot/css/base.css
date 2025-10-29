@@ -394,11 +394,17 @@ header{
     font-size: var(--note-1-size);
     font-weight: var(--w-bold);
 }
+
+.team-section > .rte {
+    padding-bottom: 1.5rem;
+}
+
 .team-section > .rte h3{
     color: var(--main-color);
     font-size: var(--heading-02-size);
     font-weight: var(--heading-02-weight);
 }
+
 .team-members{
     display: flex;
     flex-direction: column;
@@ -406,6 +412,7 @@ header{
     width: 100%;
 
 }
+
 .featured-team-members {
     width: 100%;
     --grid-min-col-size: 370px;
