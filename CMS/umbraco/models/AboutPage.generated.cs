@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>About Us Page</summary>
 	[PublishedModel("aboutPage")]
-	public partial class AboutPage : PublishedContentModel
+	public partial class AboutPage : PublishedContentModel, IHasBackgroundOptions
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -56,5 +56,21 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("sections")]
 		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Sections => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "sections");
+
+		///<summary>
+		/// Background Color
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("backgroundColor")]
+		public virtual string BackgroundColor => global::Umbraco.Cms.Web.Common.PublishedModels.HasBackgroundOptions.GetBackgroundColor(this, _publishedValueFallback);
+
+		///<summary>
+		/// Contact Background Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("contactBackgroundImage")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops ContactBackgroundImage => global::Umbraco.Cms.Web.Common.PublishedModels.HasBackgroundOptions.GetContactBackgroundImage(this, _publishedValueFallback);
 	}
 }

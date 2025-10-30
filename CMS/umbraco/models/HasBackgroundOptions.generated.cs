@@ -18,14 +18,29 @@ using Umbraco.Extensions;
 
 namespace Umbraco.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Services Page</summary>
-	[PublishedModel("servicePage")]
-	public partial class ServicePage : PublishedContentModel, IHasBackgroundOptions
+	// Mixin Content Type with alias "hasBackgroundOptions"
+	/// <summary>HasBackgroundOptions</summary>
+	public partial interface IHasBackgroundOptions : IPublishedContent
+	{
+		/// <summary>Background Color</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		string BackgroundColor { get; }
+
+		/// <summary>Contact Background Image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		global::Umbraco.Cms.Core.Models.MediaWithCrops ContactBackgroundImage { get; }
+	}
+
+	/// <summary>HasBackgroundOptions</summary>
+	[PublishedModel("hasBackgroundOptions")]
+	public partial class HasBackgroundOptions : PublishedContentModel, IHasBackgroundOptions
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
-		public new const string ModelTypeAlias = "servicePage";
+		public new const string ModelTypeAlias = "hasBackgroundOptions";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
@@ -34,14 +49,14 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(contentTypeCache, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedContentTypeCache contentTypeCache, Expression<Func<ServicePage, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedContentTypeCache contentTypeCache, Expression<Func<HasBackgroundOptions, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(contentTypeCache), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public ServicePage(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public HasBackgroundOptions(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -55,7 +70,12 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("backgroundColor")]
-		public virtual string BackgroundColor => global::Umbraco.Cms.Web.Common.PublishedModels.HasBackgroundOptions.GetBackgroundColor(this, _publishedValueFallback);
+		public virtual string BackgroundColor => GetBackgroundColor(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Background Color</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static string GetBackgroundColor(IHasBackgroundOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<string>(publishedValueFallback, "backgroundColor");
 
 		///<summary>
 		/// Contact Background Image
@@ -63,6 +83,11 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("contactBackgroundImage")]
-		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops ContactBackgroundImage => global::Umbraco.Cms.Web.Common.PublishedModels.HasBackgroundOptions.GetContactBackgroundImage(this, _publishedValueFallback);
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops ContactBackgroundImage => GetContactBackgroundImage(this, _publishedValueFallback);
+
+		/// <summary>Static getter for Contact Background Image</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		public static global::Umbraco.Cms.Core.Models.MediaWithCrops GetContactBackgroundImage(IHasBackgroundOptions that, IPublishedValueFallback publishedValueFallback) => that.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(publishedValueFallback, "contactBackgroundImage");
 	}
 }

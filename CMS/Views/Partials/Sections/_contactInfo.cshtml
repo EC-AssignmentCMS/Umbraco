@@ -1,4 +1,6 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models
+@using Umbraco.Extensions
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 
 @{
@@ -9,32 +11,50 @@
     var address = siteSettings?.Address;
     var phone = siteSettings?.PhoneNumber;
     var email = siteSettings?.EMailAddress;
+
+    var bgColor = Model.Value<string>("backgroundColor") ?? "#ffffff";
+    var bgImage = Model.Value<MediaWithCrops>("contactBackgroundImage");
 }
 
-<section class="contact-info">
+<section class="contact-info" style="background-color:@bgColor;">
+
+    <div class="contact-img-container">
+        @if (bgImage != null)
+        {
+            <img src="@bgImage.Url()" alt="@bgImage.Name" />
+        }
+    </div>
+
     <div class="info-container">
+
         <h4>Let us know about your next project</h4>
 
-        <h3>Office location</h3>
-        @if (!string.IsNullOrWhiteSpace(address))
-        {
-            <a href="https://www.google.com/maps/search/@address" target="_blank">@address</a>
-        }
+        <div class="inner-info-container">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3 class="info-heading location">Office location</h3>
+            @if (!string.IsNullOrWhiteSpace(address))
+            {
+                <a href="https://www.google.com/maps/search/@address" target="_blank">@address</a>
+            }
+        </div>
 
-        <h3>Phone number</h3>
-        <p>
+        <div class="inner-info-container">
+            <i class="fa-solid fa-phone"></i>
+            <h3 class="info-heading phone">Phone number</h3>
             @if (!string.IsNullOrWhiteSpace(phone))
             {
                 <a href="tel:@phone">@phone</a>
             }
-        </p>
+        </div>
 
-        <h3>E-mail address</h3>
-        <p>
+        <div class="inner-info-container">
+            <i class="fa-solid fa-envelope"></i>
+            <h3 class="info-heading email">E-mail address</h3>
             @if (!string.IsNullOrWhiteSpace(email))
             {
                 <a href="mailto:@email">@email</a>
             }
-        </p>
+        </div>
+
     </div>
 </section>
