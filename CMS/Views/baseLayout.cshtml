@@ -13,18 +13,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@pageTitle</title>
     <link rel="stylesheet" href="~/fontAwesome/css/all.css" asp-append-version="true" />
-    <link href="/css/base.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" asp-append-version="true" />
 
 </head>
 <body>
+    
+    <partial name="Partials/Layout/_header"/>
 
-    <partial name="Partials/Layout/Header"/>
+    <partial name="Partials/Layout/_breadcrumb" />
 
     <main id="main-content">
         @RenderBody()
     </main>
 
-    <partial name="Partials/Layout/Footer" />
+    <partial name="Partials/Layout/_footer" />
 
     <script src="~/js/site.js" asp-append-version="true"></script>
 

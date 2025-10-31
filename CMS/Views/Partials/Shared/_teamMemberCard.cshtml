@@ -1,0 +1,14 @@
+﻿@model TeamMember
+
+<figure class="team-member-card">
+    <div class="img-container">
+        @if (Model.TeamMemberImage != null)
+        {
+            <img src="@Model.TeamMemberImage.Url()" alt="@Model.TeamMemberName" />
+        }
+    </div>
+    <figcaption>
+        <h5>@Model.TeamMemberName</h5>
+        <p>@Model.TeamMemberRole</p>
+    </figcaption>
+</figure>

@@ -21,7 +21,6 @@
     var socials = new BlockListModel(siteSettings?.Value<IList<BlockListItem>>("socialMediaPlatformList") ?? new List<BlockListItem>());
 
     var selection = Model.Root().Children().Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
-    
 }
 
 <header>
@@ -66,7 +65,10 @@
                 @foreach (var item in selection)
                 {
                     <li  class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">
-                        <a class="nav-link" href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                        <a class="nav-link"
+                        href="@item.Url(PublishedUrlProvider)"
+                        data-text="@item.Name"
+                        >@item.Name</a>
                     </li>
                 }
             </ul>

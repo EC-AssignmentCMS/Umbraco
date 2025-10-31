@@ -1,7 +1,11 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<HomePage>
+
 @{
 	Layout = "baseLayout.cshtml";
 }
 
-<h1>@Model.Tesytest</h1>
+
+<partial name="Partials/Sections/_successSection" />
+
+<partial name="Partials/Sections/_partnersSection" />
