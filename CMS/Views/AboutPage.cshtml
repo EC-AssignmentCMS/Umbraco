@@ -4,6 +4,6 @@
     Layout = "baseLayout.cshtml";
 }
 
-<partial name="Partials/Sections/_teamSection" />
+@await Html.GetBlockListHtmlAsync(Model, "sections")
 
 <partial name="Partials/Sections/_contactInfo" />

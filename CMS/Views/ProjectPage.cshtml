@@ -1,6 +1,8 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ProjectPage>
+
 @{
 	Layout = "baseLayout.cshtml";
 }
-<h1>I am project</h1>
+
+@await Html.GetBlockListHtmlAsync(Model, "sections")

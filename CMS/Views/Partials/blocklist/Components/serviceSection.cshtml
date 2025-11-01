@@ -1,0 +1,158 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Extensions
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<BlockListItem>
+
+@{
+    var section = Model?.Content as ServiceSection;
+    var settings = Model?.Settings as ServiceSettings;
+
+    var showLabel = settings?.ShowServiceLabel ?? true;
+    var bgColor = settings?.ServiceBgColor ?? string.Empty;
+
+    var label = section?.ServiceLabel ?? string.Empty;
+    var title = section?.ServiceTitle ?? string.Empty;
+
+    var currentPage = Umbraco.AssignedContentItem;
+    var isHome = currentPage is HomePage;
+    var takeCount = isHome ? 6 : int.MaxValue;
+
+    ServicePage? servicesRoot = currentPage is ServicePage sp
+        ? sp
+        : Umbraco.ContentAtRoot().DescendantsOrSelf<ServicePage>().FirstOrDefault();
+
+    var items = servicesRoot?
+        .ChildrenOfType(ServiceDetail.ModelTypeAlias)?
+        .OfType<ServiceDetail>()
+        .Where(x => x.IsVisible())
+        .Take(takeCount)
+        .ToList() ?? new List<ServiceDetail>();
+}
+
+
+
+<section class="service-section" style="@(string.IsNullOrWhiteSpace(bgColor) ? "" : $"background-color:{bgColor};")">
+    <div class="service-header">
+        @if (showLabel && !string.IsNullOrWhiteSpace(label))
+        {
+            <h4 class="service-label">@label</h4>
+        }
+        @if (!string.IsNullOrWhiteSpace(title))
+        {
+            <h3 class="service-title">@title</h3>
+        }
+    </div>
+
+    <div class="cards-container">
+        @foreach (var item in items)
+        {
+            var url = item.Url();
+            var name = item.Name;
+            var teaser = item.TeaserText;
+            var hero = item.HeroImage;
+            var imgUrl = hero?.GetCropUrl() ?? hero?.Url();
+
+            <article class="service-item">
+                <a href="@url" class="service-link">
+                    <figure>
+                        <figcaption>
+                            <h3>@name</h3>
+                        </figcaption>
+
+                        <div class="item-img-container">
+                            @if (!string.IsNullOrWhiteSpace(imgUrl))
+                            {
+                                <img src="@imgUrl" alt="@name" loading="lazy" />
+                            }
+                        </div>
+
+                        @if (!string.IsNullOrWhiteSpace(teaser))
+                        {
+                            <p>@teaser</p>
+                        }
+                    </figure>
+                </a>
+            </article>
+        }
+    </div>
+</section>
+
+
+
+@* ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels; *@
+
+@{
+//     var section = Model.Value<ServiceSection>("serviceSection");
+//     var settings = Model.Value<ServiceSettings>("serviceSettings");
+
+//     var showLabel = section?.ShowServiceLabel ?? true;
+//     var bgColor = settings?.ServiceBgColor ?? "#red";
+//     var label = section?.ServiceLabel ?? "Fallback";
+//     var title = section?.ServiceTitle ?? "Fallback";
+
+//     var isHome = Model is HomePage;
+//     var takeCount = isHome ? 6 : int.MaxValue;
+
+//     ServicePage? servicesRoot = Model is ServicePage sp
+//         ? sp
+//         : Umbraco.ContentAtRoot().DescendantsOrSelf<ServicePage>().FirstOrDefault();
+
+//     var subPages = servicesRoot?
+//         .ChildrenOfType(ServiceDetail.ModelTypeAlias)?
+//         .OfType<ServiceDetail>()
+//         .Where(x => x.IsVisible())
+//         .Take(takeCount)
+//         .ToList() ?? new List<ServiceDetail>();
+
+
+
+    // var content = (ContentModels.ServiceSection)Model.Content;
+    // var settings = Model.Settings as ContentModels.ServiceSettings;
+
+    // var sectionColor = settings?.ServiceBgColor?.Color ?? "#ffffff";
+    // var bgColor = settings?.ServiceBgColor ?? "#ffffff";
+
+    // var current = Umbraco.AssignedContentItem;
+    // var siteRoot = current.Root();
+
+    // var servicePage = siteRoot.Children<ServicePage>()?.FirstOrDefault();
+    // var items = servicePage?.Children<ServiceDetail>()?.OrderByDescending(x => x.CreateDate).ToList() ?? [];
+}
+
+@* <section class="service-section" style="@(string.IsNullOrWhiteSpace(bgColor) ? "" : $"background-color:{bgColor};")"> *@
+    @* <div class="service-header">
+        @if (settings!.ShowServiceLabel)
+        {
+            <h4>@content.ServiceLabel</h4>
+        } *@
+        @* @if (!string.IsNullOrWhiteSpace(title))
+        {
+            <h3 class="service-title">@Model.Title</h3>
+        } *@
+    @* </div> *@
+
+    @* <div class="cards-container"> *@
+        @* @foreach (var item in items)
+        {
+            var hero = subPage.HeroImage;
+            var imgUrl = hero?.GetCropUrl() ?? hero?.Url() ?? "";
+            <article class="service-item">
+                <a href="@subPage.Url()" class="service-link">
+                    <figure>
+                        <figcaption>
+                            <h3>@subPage.Name</h3>
+                        </figcaption>
+                        <div class="item-img-container">
+                            <img src="@imgUrl" alt="@subPage.Name" loading="lazy" />
+                        </div>
+                        @if (!string.IsNullOrWhiteSpace(subPage.TeaserText))
+                        {
+                            <p>@subPage.TeaserText</p>
+                        }
+                    </figure>
+                </a>
+            </article>
+        } *@
+    @* </div> *@
+@* </section> *@
