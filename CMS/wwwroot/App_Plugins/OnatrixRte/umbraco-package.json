@@ -1,0 +1,36 @@
+﻿{
+  "name": "Onatrix",
+  "alias": "Onatrix.Package",
+  "extensions": [
+    {
+      "type": "tiptapToolbarExtension",
+      "kind": "styleMenu",
+      "alias": "Onatrix.Tiptap.StyleMenu",
+      "name": "Onatrix Tiptap Style Menu",
+      "meta": {
+        "alias": "OnatrixStyleMenu",
+        "icon": "icon-palette",
+        "label": "Onatrix styles"
+      },
+      "items": [
+        {
+          "label": "Headings",
+          "items": [
+            {
+              "label": "<span> 14px",
+              "data": { "tag": "span", "class": "custom-p-1" }
+            },
+            {
+              "label": "<span> 16px",
+              "data": { "tag": "span", "class": "custom-p-2" }
+            },
+            {
+              "label": "<em>",
+              "data": { "tag": "em", "class": "custom-p-3" }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

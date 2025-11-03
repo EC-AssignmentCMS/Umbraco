@@ -20,7 +20,7 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 {
 	/// <summary>Service Detail</summary>
 	[PublishedModel("serviceDetail")]
-	public partial class ServiceDetail : PublishedContentModel
+	public partial class ServiceDetail : PublishedContentModel, IHasBackgroundOptions
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
@@ -66,11 +66,43 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops HeroImage => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "heroImage");
 
 		///<summary>
+		/// Hero Image Description: This is used for describing the image for users with vision impairment.
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("heroImageDescription")]
+		public virtual string HeroImageDescription => this.Value<string>(_publishedValueFallback, "heroImageDescription");
+
+		///<summary>
 		/// Teaser Text: Text shown in the "Our Services Section".
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("teaserText")]
 		public virtual string TeaserText => this.Value<string>(_publishedValueFallback, "teaserText");
+
+		///<summary>
+		/// Widgets
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("widgets")]
+		public virtual global::Umbraco.Cms.Core.Models.Blocks.BlockListModel Widgets => this.Value<global::Umbraco.Cms.Core.Models.Blocks.BlockListModel>(_publishedValueFallback, "widgets");
+
+		///<summary>
+		/// Background Color
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("backgroundColor")]
+		public virtual string BackgroundColor => global::Umbraco.Cms.Web.Common.PublishedModels.HasBackgroundOptions.GetBackgroundColor(this, _publishedValueFallback);
+
+		///<summary>
+		/// Contact Background Image
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("contactBackgroundImage")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops ContactBackgroundImage => global::Umbraco.Cms.Web.Common.PublishedModels.HasBackgroundOptions.GetContactBackgroundImage(this, _publishedValueFallback);
 	}
 }
