@@ -1,0 +1,29 @@
+﻿@using CMS.ViewModels
+@model NewsletterViewModel
+
+@using (Html.BeginUmbracoForm("HandleNewsletterForm", "Form", FormMethod.Post, new { novalidate = "novalidate", id = "newsletterForm" }))
+{
+    <div class="input-container">
+
+        <div class="input-group">
+            <label class="sr-only" asp-for="Email">E-mail Address</label>
+            <input id="email" asp-for="Email" type="email" placeholder="@Html.DisplayFor(x => x.Email)" required>
+            <span asp-validation-for="Email"></span>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn-primary">Submit</button>
+    @if (TempData["FormSuccess"] != null)
+    {
+        <div class="form-success">
+            @TempData["FormSuccess"]
+        </div>
+    }
+    else if (TempData["FormError"] != null)
+    {
+        <div class="form-error">
+            @TempData["FormError"]
+        </div>
+    }
+}

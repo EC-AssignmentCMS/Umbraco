@@ -1,0 +1,44 @@
+﻿@using CMS.ViewModels
+@model QuestionFormViewModel
+
+@using (Html.BeginUmbracoForm("HandleQuestionForm", "Form", FormMethod.Post, new { novalidate = "novalidate", id = "questionForm" }))
+{
+    @* <form method="post" action="/umbraco/surface/CallbackForm/Submit" class="callback-form" novalidate> *@
+    <div class="input-container">
+
+        <div class="input-group">
+            <label class="sr-only" asp-for="Name">Full name</label>
+            <input id="name" asp-for="Name" type="text" placeholder="@Html.DisplayFor(x => x.Name)" required>
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div class="input-group">
+            <label class="sr-only" asp-for="Email">E-mail Address</label>
+            <input id="email" asp-for="Email" type="email" placeholder="@Html.DisplayFor(x => x.Email)" required>
+            <span asp-validation-for="Email"></span>
+        </div>
+
+
+        <div class="input-group">
+            <label class="sr-only" asp-for="Question">Question</label>
+            <input id="question" asp-for="Question" type="text" placeholder="@Html.DisplayFor(x => x.Question)" required>
+            <span asp-validation-for="Question"></span>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn-primary">Submit</button>
+
+    @if (TempData["FormSuccess"] != null)
+    {
+        <div class="form-success">
+            @TempData["FormSuccess"]
+        </div>
+    }
+    else if (TempData["FormError"] != null)
+    {
+        <div class="form-error">
+            @TempData["FormError"]
+        </div>
+    }
+}

@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using CMS.ViewModels
+
+@{
+    var content = (ContentModels.QuestionFormSection)Model.Content;
+
+}
+
+<section class="question-section">
+    <div class="form-container">
+
+        <h4>@content.QuestionFormTitle</h4>
+        <partial name="Partials/Forms/_QuestionForm" model="new QuestionFormViewModel()" />
+
+    </div>
+</section>
