@@ -117,7 +117,9 @@ h8{
 
 p {
     margin: 0;
-/*    color: var(--body-text-color);*/
+    color: var(--body-text-color);
+    font-size: var(--body-text-size);
+    /*    color: var(--body-text-color);*/
 }
 
 .custom-p-1 {
@@ -434,6 +436,7 @@ select {
     container-type: inline-size;
     container-name: callback;
     min-height: 572px;
+    box-shadow: var( --req-card-drop-shadow);
 }
 #callbackForm{
     width: 100%;
@@ -445,6 +448,9 @@ select {
 }
 
 @container callback (max-width: 500px) {
+    .form-header > h4{
+        display: none;
+    }
     .title-container {
         background-color: var(--main-color);
         padding: 1.8rem;
@@ -479,6 +485,7 @@ select {
     }
 }
 @container callback (min-width: 501px) {
+
 }
 
 /* Question Form specific styling */
@@ -670,12 +677,13 @@ header {
 
 /*Hero section end*/
 
-/* Home About us Section */
+/* Home About us Section Start*/
 .about-us-section {
     display: flex;
     flex-direction: column-reverse;
     padding-inline: var(--pad-responsive-inline);
     padding-top: 7rem;
+    gap: 2rem;
 }
 
 .about-us-section > .rte {
@@ -713,6 +721,66 @@ header {
             transform: translateY(-12rem);
         }
 }
+/* Home About us Section End*/
+
+
+/* Home Trust Section start*/
+.trust-section {
+    display: flex;
+    flex-direction: column;
+    background-image: url('/Images/world-dots.svg');
+    background-repeat: no-repeat;
+    background-position: top;
+    width: 100%;
+    min-height: 550px;
+    margin-top: 7rem;
+}
+
+.trust-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding-inline: var(--pad-responsive-inline);
+    transform: translateY(-2rem);
+    padding-bottom: 5rem;
+}
+
+    .trust-content h4{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .trust-content h4 > span {
+        font-size: var(--heading-03-size);
+        font-weight: var(--heading-02-weight);
+    }
+
+    .trust-content p{
+        text-align: center;
+
+    }
+
+    .trust-img-container {
+        display: none;
+        margin-inline: auto;
+    }
+
+    .trust-content a{
+        color: var(--sub-color-1);
+        background-color: var(--main-color);
+        font-weight: var(--w-bold);
+        padding-inline: 2rem;
+
+    }
+@media (min-width: 1340px) {
+    .trust-img-container {
+        display: flex;
+    }
+}
+/* Home Trust Section end*/
 
 
 /*Main*/
@@ -720,8 +788,14 @@ header {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-}
 
+}
+    @media (min-width: 1940px) {
+        #main-content {
+            max-width: 1920px;
+            margin-inline: auto;
+        }
+    }
 /* Our Services Section Start */
 .service-section{
     padding-inline: var(--pad-responsive-inline);
