@@ -1,0 +1,30 @@
+﻿@using CMS.ViewModels
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ServiceDetail>
+@{
+	Layout = "baseLayout.cshtml";
+}
+
+<section class="service-detail-section">
+
+    <aside class="widget">
+        @Html.GetBlockListHtml(Model.Widgets)
+
+        @* <partial name="Partials/Forms/_NewsletterForm" model="new NewsletterViewModel()" /> *@
+    </aside>
+
+    <div class="service-detail-content">
+        <div class="hero-image-container">
+            @if (Model.HeroImage != null)
+            {
+                <img src="@Model.HeroImage.Url()" alt="@Model.HeroImageDescription" />
+            }
+        </div>
+        <div class="rte">@Html.Raw(Model.BodyText)</div>
+    </div>
+
+</section>
+
+@Html.GetBlockListHtml(Model.Sections)
+
+<partial name="Partials/Sections/_contactInfo" />

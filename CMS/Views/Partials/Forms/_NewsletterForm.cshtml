@@ -1,0 +1,27 @@
+﻿@using CMS.Controllers
+@using CMS.ViewModels
+@model NewsletterViewModel
+
+@using (Html.BeginUmbracoForm<FormController>(nameof(FormController.HandleNewsletterForm), FormMethod.Post, new { novalidate = "novalidate", id = "newsletterForm" }))
+{
+    <div class="input-group">
+        <label class="sr-only" asp-for="NewsletterEmail">E-mail Address</label>
+        <input id="NewsletterEmail" asp-for="NewsletterEmail" type="email" placeholder="@Html.DisplayNameFor(x => x.NewsletterEmail)" required>
+        <span asp-validation-for="NewsletterEmail"></span>
+
+        <button type="submit" class="btn-primary email"></button>
+    </div>
+   
+    @if (TempData["SignUpSuccess"] != null)
+    {
+        <span class="form-message success">
+            @TempData["SignUpSuccess"]
+        </span>
+    }
+    else if (TempData["SignUpError"] != null)
+    {
+        <span class="form-message error">
+            @TempData["SignUpError"]
+        </span>
+    }
+}

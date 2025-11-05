@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Extensions
+
+@{
+    var content = (ContentModels.PartnerSection)Model.Content;
+
+    var partners = content.PartnerList?
+        .Select(x => x.Content)
+        .OfType<ContentModels.Partners>()
+        .ToList() ?? new List<ContentModels.Partners>();
+}
+
+@if (partners.Count > 0)
+{
+    <section class="partners-section">
+
+        @foreach (var partner in partners)
+        {
+            var logo = partner.PartnerLogoImage;
+            var altText = partner.PartnerName ?? "Partner logo";
+            var logoUrl = logo?.GetCropUrl() ?? string.Empty;
+            <div class="logo-container">
+                @if (!string.IsNullOrEmpty(logoUrl))
+                {
+                    <img src="@logoUrl"
+                    alt="@altText"
+                    loading="lazy"  
+                    decoding="async" />
+                }
+            </div>
+        }
+
+    </section>
+}

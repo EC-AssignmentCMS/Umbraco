@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using CMS.ViewModels
+
+@{
+    var content = (ContentModels.NewsletterFormWidget)Model.Content;
+
+}
+
+<div class="newsletter-widget">
+
+    <h4>@content.NewsletterFormTitle</h4>
+    <p>@content.NewsletterFormText</p>
+
+    <partial name="Partials/Forms/_NewsletterForm" model="new NewsletterViewModel()" />
+
+</div>
