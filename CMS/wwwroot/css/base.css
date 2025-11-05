@@ -13,6 +13,8 @@
     --border-color: #EAEAEA;
     --footer-bg: #0E0E0E;
     --swedbank: #2D303A;
+    --color-success: hsl(156 100% 32.9%);
+    --color-error: hsl(0 83% 60%);
     --w-light: 300;
     --w-medium: 500;
     --w-semibold: 600;
@@ -57,6 +59,7 @@
     --letus-card-drop-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.102);
     --pad-responsive-inline: clamp( 1rem, calc( 1rem + (23.5rem - 1rem) * ((100vw - 380px) / (1920px - 380px)) ), 23.5rem );
     --card-size: 370px;
+    --border-radius: .3rem;
 }
 
 @font-face {
@@ -169,6 +172,29 @@ figure, figcaption {
 /* Buttons */
 button {
     all: unset;
+}
+
+.btn-primary {
+    font-family: var(--font, 'Poppins', sans-serif);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: all 0.25s ease-in-out;
+}
+
+button.email::after {
+    content: "\f0e0";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 400;
+    font-style: normal;
+    display: inline-block;
+    font-size: 1.3em;
+    line-height: 1;
+    transition: color 0.3s;
+    color: var(--main-color);
 }
 
 /* A-tags Links  */
@@ -288,17 +314,135 @@ a {
     }
 }
 
+/* Form styling start */
+.input-group > input {
+    color: var(--main-color-dark);
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: .8rem 1.3rem;
+    outline: none;
+}
 
+.input-group textarea {
+    color: var(--main-color-dark);
+    font-family: var(--font);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: .8rem 1.3rem;
+    resize: vertical;
+    overflow: hidden;
+    outline: none;
+    font-family: inherit;
+    font-size: var(--body-text-size);
+    transition: border-color 0.2s;
+}
+
+textarea::placeholder {
+    font-size: var(--note-2-size);
+}
+.form-message,
+.field-validation-error {
+    font-size: var(--note-2-size);
+    font-weight: var(--w-medium);
+}
+    .form-message::before,
+    .field-validation-error::before {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-style: normal;
+        display: inline-block;
+        font-size: var(--note-2-size);
+        line-height: 1;
+        font-size: 1.1em;
+        transition: color 0.3s;
+        margin-right: .3rem;
+    }
+    .form-message.error,
+    .field-validation-error {
+        color: var(--color-error);
+    }
+        .form-message.error::before,
+        .field-validation-error::before {
+            content: "\f071";
+        }
+
+    .form-message.success {
+        color: var(--color-success);
+    }
+        .form-message.success::before {
+            content: "\f058";
+        }
+
+/* Question Form specific styling */
+.question-section {
+    padding-inline: var(--pad-responsive-inline);
+    padding-bottom: 5rem;
+
+}
+.question-section > .form-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+    .question-section h4{
+        font-size: var(--heading-05-size);
+        font-weight: var(--w-bold);
+    }
+
+    #questionForm {
+    }
+
+#questionForm > .input-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding-block: .8rem;
+}
+
+#questionForm .input-group:last-child {
+    grid-column: 1 / -1;
+}
+
+        #questionForm textarea {
+            width: 100%;
+            max-width: 100%;
+            min-height: 120px;
+        }
+        #questionForm button{
+            font-size: var(--sub-title-2-size);
+            font-weight: var(--w-bold);
+            padding: .8rem 2rem;
+            color: var(--sub-color-1);
+            background-color: var(--main-color);
+        }
+        /* Newsletter form specific styling */
+        #newsletterForm .input-group {
+            margin-top: 1rem;
+            position: relative;
+        }
+
+    #newsletterForm .input-group > input {
+        padding-right: 2.3rem;
+        border: none;
+    }
+
+#newsletterForm button.btn-primary{
+    padding: 0;
+    position: absolute;
+    top: 11px;
+    right: 10px;
+}
+
+/* Form styling end */
 
 
 /*Header start*/
-header{
+header {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
-
-
 
 .top-nav {
     display: flex;
@@ -318,8 +462,6 @@ header{
     align-items: center;
     justify-content: space-between;
     padding: 1.2rem var(--pad-responsive-inline);
-
-
 }
 
 .page-navigation {
@@ -469,23 +611,27 @@ header{
     align-self: stretch;
     padding-right: 2rem;
 }
+    .widget > div{
+        display: flex;
+        flex-direction: column;
+        gap: 2.8rem;
+    }
 
+    .info-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-.widget > div {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+    .info-card h5 {
+        font-size: var(--heading-05-size);
+        font-weight: var(--w-semibold);
+    }
 
-.widget h5 {
-    font-size: var(--heading-05-size);
-    font-weight: var(--w-semibold);
-}
-
-.widget p{
-    font-size: var(--body-text-size);
-    color: var(--body-text-color);
-}
+    .info-card p {
+        font-size: var(--body-text-size);
+        color: var(--body-text-color);
+    }
 
 .newsletter-widget {
     background-image: url('/Images/newsletter-Bg.svg');
@@ -496,15 +642,26 @@ header{
     min-height: 223px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 1rem;
+    gap: 1.2rem;
+    border-radius: .3rem;
 }
 
-.service-detail-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+    .newsletter-widget h4 {
+        color: var(--sub-color-1);
+        font-size: var(--heading-07-size);
+    }
+
+    .newsletter-widget p {
+        color: white;
+        font-size: var(--note-1-size);
+    }
+
+    .service-detail-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
 .service-detail-content img,
 .widget img{

@@ -72,11 +72,11 @@ public class FormController(
         var result = _formSubmissions.SaveNewsletterRequest(model);
         if (!result)
         {
-            TempData["FormError"] = "Something went wrong while submitting your request. Please try again later.";
+            TempData["SignUpError"] = "Error. Please try again later.";
             return RedirectToCurrentUmbracoPage();
         }
 
-        TempData["FormSuccess"] = "Thank you! Your request has been received and we will get back to you soon.";
+        TempData["SignUpSuccess"] = "Thank you for signing up!";
 
         return RedirectToCurrentUmbracoPage();
     }

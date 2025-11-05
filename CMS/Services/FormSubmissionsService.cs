@@ -45,7 +45,7 @@ public class FormSubmissionsService(IContentService contentService)
 
             request.SetValue("questionRequestName", model.Name);
             request.SetValue("questionRequestEmail", model.Email);
-            request.SetValue("callbackRequestPhone", model.Question);
+            request.SetValue("questionRequestQuestion", model.Question);
 
             var saveResult = _contentService.Save(request);
             return saveResult.Success;
@@ -64,10 +64,10 @@ public class FormSubmissionsService(IContentService contentService)
             if (container == null)
                 return false;
 
-            var requestName = $"{DateTime.Now:yyyy-MM-dd HH:mm} - Newsletter request";
+            var requestName = $"{DateTime.Now:yyyy-MM-dd HH:mm} - Newsletter request KUUUUUK";
             var request = _contentService.Create(requestName, container, "newsletterRequest");
 
-            request.SetValue("newsletterRequestEmail", model.Email);
+            request.SetValue("newsletterRequestEmail", model.NewsletterEmail);
 
             var saveResult = _contentService.Save(request);
             return saveResult.Success;

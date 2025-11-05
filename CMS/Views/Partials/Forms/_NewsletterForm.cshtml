@@ -1,29 +1,27 @@
-﻿@using CMS.ViewModels
+﻿@using CMS.Controllers
+@using CMS.ViewModels
 @model NewsletterViewModel
 
-@using (Html.BeginUmbracoForm("HandleNewsletterForm", "Form", FormMethod.Post, new { novalidate = "novalidate", id = "newsletterForm" }))
+@using (Html.BeginUmbracoForm<FormController>(nameof(FormController.HandleNewsletterForm), FormMethod.Post, new { novalidate = "novalidate", id = "newsletterForm" }))
 {
-    <div class="input-container">
+    <div class="input-group">
+        <label class="sr-only" asp-for="NewsletterEmail">E-mail Address</label>
+        <input id="NewsletterEmail" asp-for="NewsletterEmail" type="email" placeholder="@Html.DisplayNameFor(x => x.NewsletterEmail)" required>
+        <span asp-validation-for="NewsletterEmail"></span>
 
-        <div class="input-group">
-            <label class="sr-only" asp-for="Email">E-mail Address</label>
-            <input id="email" asp-for="Email" type="email" placeholder="@Html.DisplayFor(x => x.Email)" required>
-            <span asp-validation-for="Email"></span>
-        </div>
-
+        <button type="submit" class="btn-primary email"></button>
     </div>
-
-    <button type="submit" class="btn-primary">Submit</button>
-    @if (TempData["FormSuccess"] != null)
+   
+    @if (TempData["SignUpSuccess"] != null)
     {
-        <div class="form-success">
-            @TempData["FormSuccess"]
-        </div>
+        <span class="form-message success">
+            @TempData["SignUpSuccess"]
+        </span>
     }
-    else if (TempData["FormError"] != null)
+    else if (TempData["SignUpError"] != null)
     {
-        <div class="form-error">
-            @TempData["FormError"]
-        </div>
+        <span class="form-message error">
+            @TempData["SignUpError"]
+        </span>
     }
 }

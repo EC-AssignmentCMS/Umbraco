@@ -1,27 +1,27 @@
-﻿@using CMS.ViewModels
+﻿@using CMS.Controllers
+@using CMS.ViewModels
 @model QuestionFormViewModel
 
-@using (Html.BeginUmbracoForm("HandleQuestionForm", "Form", FormMethod.Post, new { novalidate = "novalidate", id = "questionForm" }))
+@using (Html.BeginUmbracoForm<FormController>(nameof(FormController.HandleQuestionForm), FormMethod.Post, new { novalidate = "novalidate", id = "questionForm" }))
 {
-    @* <form method="post" action="/umbraco/surface/CallbackForm/Submit" class="callback-form" novalidate> *@
     <div class="input-container">
 
         <div class="input-group">
             <label class="sr-only" asp-for="Name">Full name</label>
-            <input id="name" asp-for="Name" type="text" placeholder="@Html.DisplayFor(x => x.Name)" required>
+            <input id="Name" asp-for="Name" type="text" placeholder="@Html.DisplayNameFor(x => x.Name)" required>
             <span asp-validation-for="Name"></span>
         </div>
 
         <div class="input-group">
             <label class="sr-only" asp-for="Email">E-mail Address</label>
-            <input id="email" asp-for="Email" type="email" placeholder="@Html.DisplayFor(x => x.Email)" required>
+            <input id="Email" asp-for="Email" type="email" placeholder="@Html.DisplayNameFor(x => x.Email)" required>
             <span asp-validation-for="Email"></span>
         </div>
 
 
         <div class="input-group">
             <label class="sr-only" asp-for="Question">Question</label>
-            <input id="question" asp-for="Question" type="text" placeholder="@Html.DisplayFor(x => x.Question)" required>
+            <textarea id="Question" asp-for="Question" type="text" placeholder="@Html.DisplayNameFor(x => x.Question)" required></textarea>
             <span asp-validation-for="Question"></span>
         </div>
 
@@ -31,14 +31,14 @@
 
     @if (TempData["FormSuccess"] != null)
     {
-        <div class="form-success">
+        <span class="form-message success">
             @TempData["FormSuccess"]
-        </div>
+        </span>
     }
     else if (TempData["FormError"] != null)
     {
-        <div class="form-error">
+        <span class="form-message error">
             @TempData["FormError"]
-        </div>
+        </span>
     }
 }
