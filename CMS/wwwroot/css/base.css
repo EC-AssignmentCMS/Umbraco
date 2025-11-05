@@ -314,7 +314,7 @@ a {
     }
 }
 
-/* Form styling start */
+/* Forms styling start */
 .input-group > input {
     color: var(--main-color-dark);
     width: 100%;
@@ -322,6 +322,7 @@ a {
     border-radius: var(--border-radius);
     padding: .8rem 1.3rem;
     outline: none;
+    margin-bottom: .3em;
 }
 
 .input-group textarea {
@@ -338,9 +339,39 @@ a {
     transition: border-color 0.2s;
 }
 
-textarea::placeholder {
+textarea::placeholder,
+select::placeholder,
+input::placeholder{
+    color: var(--note-1-color);
     font-size: var(--note-2-size);
+    font-style: italic;
 }
+
+.select-wrapper {
+    position: relative;
+}
+
+    .select-wrapper i {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        color: var(--main-color);
+    }
+
+select {
+    color: var(--main-color-dark);
+    font-family: var(--font);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: .8rem 1.3rem;
+    appearance: none;
+    padding-right: 2rem;
+    width: 100%;
+    outline: none;
+}
+
 .form-message,
 .field-validation-error {
     font-size: var(--note-2-size);
@@ -374,11 +405,86 @@ textarea::placeholder {
             content: "\f058";
         }
 
+.input-group span[data-valmsg-for] {
+    display: block;
+    min-height: 1em;
+    line-height: 1.2;
+}
+
+.field-validation-valid {
+    visibility: hidden;
+}
+
+.field-validation-error {
+    visibility: visible;
+}
+
+.field-validation-valid::before {
+    content: none !important;
+}
+
+.input-group span[data-valmsg-for] {
+    word-break: break-word;
+}
+
+
+/* Callback Form specific styling   request */
+.callback-section {
+    width: min(100%, 1200px);
+    container-type: inline-size;
+    container-name: callback;
+    min-height: 572px;
+}
+#callbackForm{
+    width: 100%;
+}
+#callbackForm button {
+    width: 100%;
+    padding: 1rem 0;
+    font-weight: var(--w-bold);
+}
+
+@container callback (max-width: 500px) {
+    .title-container {
+        background-color: var(--main-color);
+        padding: 1.8rem;
+    }
+
+    h3 {
+        font-size: var(--heading-03-size);
+        color: var(--sub-color-1);
+    }
+
+    p {
+        color: var(--body-text-color);
+        font-size: 13px;
+        font-style: italic;
+        padding: 1rem 1.8rem;
+    }
+
+    .form-container {
+        padding: 1.8rem 1.8rem 0 1.8rem;
+    }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn-primary {
+        background-color: var(--sub-color-1);
+        color: var(--main-color);
+        margin-block: 2rem;
+    }
+}
+@container callback (min-width: 501px) {
+}
+
 /* Question Form specific styling */
 .question-section {
     padding-inline: var(--pad-responsive-inline);
     padding-bottom: 5rem;
-
 }
 .question-section > .form-container{
     display: flex;
@@ -519,6 +625,94 @@ header {
     color: var(--sub-color-3);
 }
 /*Breadcrumb Banner end*/
+
+
+/*Hero section start*/
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    min-height: 552px;
+    display: flex;
+    flex-direction: column;
+    padding-inline: var(--pad-responsive-inline);
+    justify-content: center;
+}
+
+.hero-content{
+    display: flex;
+    flex-direction: column;
+    max-width: 570px;
+    gap: 2rem;
+}
+
+    .hero-content h1{
+        max-width: 450px;
+        font-size: var(--heading-01-size);
+        font-weight: var(--heading-01-weight);
+    }
+
+    .hero-content p  {
+        color: var(--main-color);
+    }
+
+    .hero-content a {
+        padding: 1rem 2rem;
+        color: var(--sub-color-1);
+        background-color: var(--main-color);
+        max-width: 120px;
+        font-size: var(--heading-06-size);
+        font-weight: var(--w-bold);
+    }
+
+/*Hero section end*/
+
+/* Home About us Section */
+.about-us-section {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-inline: var(--pad-responsive-inline);
+    padding-top: 7rem;
+}
+
+.about-us-section > .rte {
+    max-width: 670px;
+    color: var(--main-color);
+}
+    .about-us-section > .rte > *:first-child {
+        color: var(--sub-color-3);
+        font-size: var(--note-2-size);
+    }
+
+    .about-us-section > .rte > *:not(:last-child):not(:nth-child(2)) {
+        padding-top: 1rem;
+    }
+
+
+    .about-us-section > .rte > h3 {
+        padding-top: 0;
+        font-size: var(--heading-03-size);
+        font-weight: var(--heading-02-weight);
+    }
+
+.about-us-section .umb-block-list{
+    max-width: 470px;
+    width: 100%;
+
+}
+
+@media (min-width: 1340px) {
+    .about-us-section {
+        flex-direction: row;
+    }
+
+        .about-us-section .umb-block-list {
+            transform: translateY(-12rem);
+        }
+}
 
 
 /*Main*/

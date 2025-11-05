@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using CMS.ViewModels
+@using Umbraco.Extensions
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var content = (ContentModels.CallbackFormSection)Model.Content;
+    var settings = Model.Settings as ContentModels.CallbackSettings;
+
+    var formVM = new CallbackFormViewModel
+    {
+        Options = settings?.CallbackRequestOptions ?? []
+    };
+}
+
+<section class="callback-section">
+
+    <div class="form-header">
+        @if (settings?.CallbackShowLabelToggle == true)
+        {
+            <h4>@content.CallbackLabel</h4>
+        }
+        <div class="title-container">
+            <h3>@content.CallbackTitle</h3>
+
+        </div>
+            
+        <p>@content.CallbackText</p>
+    </div>
+
+    <div class="form-container">
+        <partial name="Partials/Forms/_CallbackForm" model="formVM" /> 
+     </div>
+
+</section>
