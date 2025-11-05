@@ -1,5 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using CMS.Controllers
+@using CMS.ViewModels
+@model CallbackFormViewModel
+
+@using (Html.BeginUmbracoForm<FormController>(nameof(FormController.HandleCallbackForm), FormMethod.Post, new { novalidate = "novalidate", id = "callbackForm" }))
+{
+    <div class="input-container">
+
+        <div class="input-group">
+            <label class="sr-only" asp-for="Name">Full name</label>
+            <input autocomplete="on" id="Name" asp-for="Name" type="text" placeholder="@Html.DisplayNameFor(x => x.Name)" required>
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div class="input-group">
+            <label class="sr-only" asp-for="Phone">Phone</label>
+            <input id="Phone" asp-for="Phone" type="text" placeholder="@Html.DisplayNameFor(x => x.Phone)" required>
+            <span asp-validation-for="Phone"></span>
+        </div>
+
+        <div class="input-group">
+            <label class="sr-only" asp-for="Email">E-mail Address</label>
+            <input id="Email" asp-for="Email" type="email" placeholder="@Html.DisplayNameFor(x => x.Email)" required>
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div class="input-group select-wrapper">
+            <label class="sr-only" asp-for="SelectedOption">Select advisor</label>
+            <select id="SelectedOption" asp-for="SelectedOption" required>
+                @foreach (var option in Model.Options ?? Enumerable.Empty<string>())
+                {
+                    <option value="@option">@option</option>
+                }
+            </select>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </div>
+
+    <button type="submit" class="btn-primary">Submit</button>
+
+    @if (TempData["FormSuccess"] != null)
+    {
+        <span class="form-message success">
+            @TempData["FormSuccess"]
+        </span>
+    }
+    else if (TempData["FormError"] != null)
+    {
+        <span class="form-message error">
+            @TempData["FormError"]
+        </span>
+    }
 }

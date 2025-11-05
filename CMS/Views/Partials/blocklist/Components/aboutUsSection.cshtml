@@ -1,0 +1,18 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Extensions
+
+@{
+    var content = (ContentModels.AboutUsSection)Model.Content;
+}
+
+<section class="about-us-section">
+    <div class="rte">
+        @content.AboutUsRichTextEditor
+    </div>
+
+    @if (content.CallbackForm != null && content.CallbackForm.Any())
+    {
+        @Html.GetBlockListHtml(content.CallbackForm)
+    }
+</section>
