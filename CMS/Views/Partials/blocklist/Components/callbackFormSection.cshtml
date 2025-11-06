@@ -11,25 +11,32 @@
     {
         Options = settings?.CallbackRequestOptions ?? []
     };
+
+    var page = Umbraco.AssignedContentItem;
+
+    var pageClass =
+        page?.IsDocumentType(ContentModels.HomePage.ModelTypeAlias) == true ? "home-p" :
+        page?.IsDocumentType(ContentModels.ContactPage.ModelTypeAlias) == true ? "contact-p" :
+        null;
 }
 
-<section class="callback-section">
+<section class="callback-section @(pageClass)">
+    <div class="callback-section-container">
+        <div class="form-header">
+            @if (settings?.CallbackShowLabelToggle == true)
+            {
+                <h4>@content.CallbackLabel</h4>
+            }
+            <div class="title-container">
+                <h3>@content.CallbackTitle</h3>
 
-    <div class="form-header">
-        @if (settings?.CallbackShowLabelToggle == true)
-        {
-            <h4>@content.CallbackLabel</h4>
-        }
-        <div class="title-container">
-            <h3>@content.CallbackTitle</h3>
+            </div>
 
+            <p>@content.CallbackText</p>
         </div>
-            
-        <p>@content.CallbackText</p>
+
+        <div class="form-container">
+            <partial name="Partials/Forms/_CallbackForm" model="formVM" />
+        </div>
     </div>
-
-    <div class="form-container">
-        <partial name="Partials/Forms/_CallbackForm" model="formVM" /> 
-     </div>
-
 </section>
