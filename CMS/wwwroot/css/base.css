@@ -15,6 +15,7 @@
     --swedbank: #2D303A;
     --color-success: hsl(156 100% 32.9%);
     --color-error: hsl(0 83% 60%);
+    --bg-color-grey: #F7F7F7;
     --w-light: 300;
     --w-medium: 500;
     --w-semibold: 600;
@@ -131,7 +132,19 @@ p {
     color: var(--body-text-color);
 }
 
-.custom-p-3 {
+.custom-p-3{
+    color: var(--sub-color-3);
+    font-weight: var(--w-bold);
+    font-size: var(--body-text-size);
+}
+
+.custom-p-4 {
+    color: var(--main-color );
+    font-style: italic;
+    font-size: var(--sub-title-1-size);
+}
+
+.custom-p-5 {
     font-style: italic;
     color: var(--body-text-color);
 }
@@ -633,6 +646,19 @@ header {
 }
 /*Breadcrumb Banner end*/
 
+/*Main*/
+#main-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+@media (min-width: 1940px) {
+    #main-content {
+        max-width: 1920px;
+        margin-inline: auto;
+    }
+}
 
 /*Hero section start*/
 .hero-section {
@@ -682,7 +708,7 @@ header {
     display: flex;
     flex-direction: column-reverse;
     padding-inline: var(--pad-responsive-inline);
-    padding-top: 7rem;
+    padding-block: 2rem;
     align-items: center;
     gap: 2rem;
 }
@@ -691,10 +717,6 @@ header {
     max-width: 670px;
     color: var(--main-color);
 }
-    .about-us-section > .rte > *:first-child {
-        color: var(--sub-color-3);
-        font-size: var(--note-2-size);
-    }
 
     .about-us-section.home-p > .rte > *:not(:last-child):not(:nth-child(2)) {
         padding-top: 1rem;
@@ -722,8 +744,12 @@ header {
     flex-direction: column;
     gap: 1rem;
 }
+.about-us-section.about-p {
+    padding-block: 3rem;
+}
+
     .about-us-section.about-p > .rte > h3 {
-        
+        padding-bottom: 1rem;
         font-size: var(--heading-05-size);
         font-weight: var(--w-light);
     }
@@ -746,11 +772,16 @@ header {
 @media (min-width: 1340px) {
     .about-us-section {
         flex-direction: row;
+        padding-block: 0;
     }
 
         .about-us-section .umb-block-list {
-            transform: translateY(-12rem);
+            transform: translateY(-5rem);
         }
+
+    .about-us-section.about-p {
+        padding-block: 7rem;
+    }
 }
 /* Home / About Us page - About us Section End*/
 
@@ -814,21 +845,70 @@ header {
 /* Home Trust Section end*/
 
 
-/*Main*/
-#main-content {
+/* About Us page - Trust Section Start */
+.about-trust-section {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-
+    justify-content: center;
+    gap: 1rem;
+    background-color: var(--bg-color-grey);
 }
-    @media (min-width: 1940px) {
-        #main-content {
-            max-width: 1920px;
-            margin-inline: auto;
-        }
+
+    .about-trust-section > .rte-container {
+        display: flex;
+        justify-content: center;
+        padding-inline: var(--pad-responsive-inline);
     }
+
+        .about-trust-section > .rte-container .rte {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding-block: 4rem;
+            justify-content: center;
+            max-width: 570px;
+        }
+
+        .about-trust-section > .rte-container .rte h3 {
+            font-size: var(--heading-03-size);
+        }
+
+.about-trust-img-c {
+    width: 100%;
+}
+    .about-trust-img-c img {
+        width: 100%;
+        height: auto;
+        inset: 0;
+        object-fit: cover;
+        display: block;
+    }
+
+@media (min-width: 1340px) {
+    .about-trust-section {
+        flex-direction: row;
+    }
+
+        .about-trust-section > .rte-container {
+            padding-left: var(--pad-responsive-inline);
+            padding-right: 0;
+        }
+
+            .about-trust-section > .rte-container .rte {
+                padding-block: 1rem;
+            }
+
+    .about-trust-img-c {
+        max-width: 900px;
+        margin-right: 0;
+        margin-left: auto;
+    }
+}
+/* About Us page - Trust Section End */
+
+
 /* Our Services Section Start */
-.service-section{
+.service-section {
     padding-inline: var(--pad-responsive-inline);
     padding-block: 5rem;
 }

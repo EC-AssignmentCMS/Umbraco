@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Extensions
+
+@{
+    var content = (ContentModels.AboutTrustSection)Model.Content;
+    var showImg = content.AboutTrustImg != null;
+}
+
+<section class="about-trust-section">
+    <div class="rte-container">
+        <div class="rte">
+            @content.AboutTrustRte
+        </div>
+    </div>
+
+
+    @if (showImg)
+    {
+        <div class="about-trust-img-c">
+            <img src="@content.AboutTrustImg!.Url()" alt="Image of Onatrix employee" loading="lazy" />
+        </div>
+    }
+</section>
