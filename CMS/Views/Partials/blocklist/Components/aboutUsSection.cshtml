@@ -4,14 +4,37 @@
 
 @{
     var content = (ContentModels.AboutUsSection)Model.Content;
+    var settings = Model.Settings as ContentModels.AboutUsSettings;
+    var showImgSig = settings != null && settings.AboutImgSigToggle && content.AboutUsImage != null;
+    var showCallback = settings != null && settings.AboutCallbackFormToggle && content.CallbackForm != null && content.CallbackForm.Any();
+
+    var page = Umbraco.AssignedContentItem;
+
+    var pageClass =
+        page?.IsDocumentType(ContentModels.HomePage.ModelTypeAlias) == true ? "home-p" :
+        page?.IsDocumentType(ContentModels.AboutPage.ModelTypeAlias) == true ? "about-p" :
+        null;
 }
 
-<section class="about-us-section">
+<section class="about-us-section @(pageClass)">
+    @if (showImgSig && !showCallback)
+    {
+        <div class="ceo-container">
+            <div class="ceo-img-container">
+                <img src="@content.AboutUsImage!.Url()" alt="Image of Onatrix CEO" loading="lazy" />
+            </div>
+            @if (!string.IsNullOrWhiteSpace(content.AboutUsSignature))
+            {
+                <p>@content.AboutUsSignature</p>
+            }
+        </div>
+    }
+
     <div class="rte">
         @content.AboutUsRichTextEditor
     </div>
 
-    @if (content.CallbackForm != null && content.CallbackForm.Any())
+    @if (showCallback && !showImgSig)
     {
         @Html.GetBlockListHtml(content.CallbackForm)
     }

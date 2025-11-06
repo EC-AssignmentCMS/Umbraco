@@ -50,12 +50,28 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
+		/// AboutUsImage
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("aboutUsImage")]
+		public virtual global::Umbraco.Cms.Core.Models.MediaWithCrops AboutUsImage => this.Value<global::Umbraco.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "aboutUsImage");
+
+		///<summary>
 		/// Rich Text Editor
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("aboutUsRichTextEditor")]
 		public virtual global::Umbraco.Cms.Core.Strings.IHtmlEncodedString AboutUsRichTextEditor => this.Value<global::Umbraco.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "aboutUsRichTextEditor");
+
+		///<summary>
+		/// AboutUsSignature
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "16.3.2+8aa9dc8")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("aboutUsSignature")]
+		public virtual string AboutUsSignature => this.Value<string>(_publishedValueFallback, "aboutUsSignature");
 
 		///<summary>
 		/// Form
