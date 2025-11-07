@@ -502,16 +502,22 @@ select {
 }
 
 .contact-p .callback-section-container {
-    padding: 4.5rem;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+@media (min-width: 768px) {
+    .contact-p .callback-section-container {
+        padding: 2rem;
+    }
+}
+
 @media (min-width: 1320px) {
     .contact-p .callback-section-container {
         transform: translateY(13rem);
+        padding: 4.5rem;
     }
 }
 
@@ -562,6 +568,7 @@ select {
     }
 
     .form-container {
+        padding: 1rem;
         width: 100%;
     }
 
@@ -1253,6 +1260,11 @@ header {
         figure.success-story {
             width: 370px;
         }
+
+        figure.success-story .highlight {
+            font-size: 100px;
+            font-weight: var(--heading-01-weight);
+        }
     }
     /* Success story Section end */
 
@@ -1360,7 +1372,7 @@ header {
 
     .team-member-card h5 {
         color: var(--main-color);
-        font-size: var(--heading-03-size);
+        font-size: var(--heading-05-size);
     }
 
     .team-member-card p {
