@@ -1,11 +1,13 @@
-﻿using CMS.ViewModels;
+﻿using CMS.Interfaces;
+using CMS.ViewModels;
 using Umbraco.Cms.Core.Services;
 
 namespace CMS.Services;
 
-public class FormSubmissionsService(IContentService contentService)
+public class FormSubmissionsService(IContentService contentService, IEmailSender emailSender) : IFormSubmissionsService
 {
     private readonly IContentService _contentService = contentService;
+    private readonly IEmailSender _emailSender = emailSender;
 
     public bool SaveCallbackRequest(CallbackFormViewModel model)
     {
@@ -22,6 +24,9 @@ public class FormSubmissionsService(IContentService contentService)
             request.SetValue("callbackRequestEmail", model.Email);
             request.SetValue("callbackRequestPhone", model.Phone);
             request.SetValue("callbackRequestOption", model.SelectedOption);
+
+            //Här ska vi skicka "Confirmation Email"
+
 
             var saveResult = _contentService.Save(request);
             return saveResult.Success;
@@ -46,7 +51,7 @@ public class FormSubmissionsService(IContentService contentService)
             request.SetValue("questionRequestName", model.Name);
             request.SetValue("questionRequestEmail", model.Email);
             request.SetValue("questionRequestQuestion", model.Question);
-
+            //Här ska vi skicka "Confirmation Email"
             var saveResult = _contentService.Save(request);
             return saveResult.Success;
         }
@@ -68,8 +73,9 @@ public class FormSubmissionsService(IContentService contentService)
             var request = _contentService.Create(requestName, container, "newsletterRequest");
 
             request.SetValue("newsletterRequestEmail", model.NewsletterEmail);
-
+            //Här ska vi skicka "Confirmation Email"
             var saveResult = _contentService.Save(request);
+
             return saveResult.Success;
         }
         catch (Exception)

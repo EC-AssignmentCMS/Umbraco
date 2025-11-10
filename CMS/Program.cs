@@ -1,3 +1,4 @@
+using CMS.Interfaces;
 using CMS.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,14 @@ builder.CreateUmbracoBuilder()
     .AddComposers()
     .Build();
 
-builder.Services.AddScoped<FormSubmissionsService>();
+builder.Services.AddScoped<IFormSubmissionsService, FormSubmissionsService>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+builder.Services.AddHttpClient("EmailServiceProvider", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["EmailServiceApi"]!);
+});
+
 
 WebApplication app = builder.Build();
 
