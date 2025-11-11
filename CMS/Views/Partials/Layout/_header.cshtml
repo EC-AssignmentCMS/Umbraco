@@ -1,15 +1,6 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Cms.Core.Models.Blocks
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-@using Umbraco.Cms.Core.Models.PublishedContent
-@using Umbraco.Cms.Core.PublishedCache
-@using Umbraco.Cms.Core.Routing
-@using Umbraco.Cms.Core.Services.Navigation
-@inject IVariationContextAccessor VariationContextAccessor
-@inject IPublishedContentCache PublishedContentCache
-@inject IDocumentNavigationQueryService DocumentNavigationQueryService
-@inject IPublishedValueFallback PublishedValueFallback
-@inject IPublishedUrlProvider PublishedUrlProvider
 
 @{
     var siteSettings = Umbraco.ContentAtRoot()
@@ -19,8 +10,6 @@
     var address = siteSettings?.Address ?? "No address found.";
     var logoImg = siteSettings?.LogoImage;
     var socials = new BlockListModel(siteSettings?.Value<IList<BlockListItem>>("socialMediaPlatformList") ?? new List<BlockListItem>());
-
-    var selection = Model.Root().Children().Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
 }
 
 <header>
@@ -59,26 +48,13 @@
             
         </a>
 
-        @if (selection?.Length > 0)
-        {
-            <ul aria-label="Main page navigation" class="page-navigation">
-                @foreach (var item in selection)
-                {
-                    <li  class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">
-                        <a class="nav-link"
-                        href="@item.Url(PublishedUrlProvider)"
-                        data-text="@item.Name"
-                        >@item.Name</a>
-                    </li>
-                }
-            </ul>
-        }
+        <partial name="Partials/Shared/_pageNavigation" />
+
         <div class="search-container">
             <i class="fa-solid fa-magnifying-glass"></i>
         </div>
 
+        <partial name="Partials/Shared/_hamburgerMenu" />
     </nav>
-
-
 
 </header>

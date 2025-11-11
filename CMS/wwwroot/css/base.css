@@ -683,30 +683,191 @@ header {
     padding: 1.2rem var(--pad-responsive-inline);
 }
 
-.page-navigation {
-    display: flex;
-    gap: 1rem;
-}
+    .main-navigation > .page-navigation {
+        display: none;
+        gap: 1rem;
 
-@media (width >=768px) {
-    .page-navigation {
-        gap: 4rem;
     }
-}
+        .main-navigation > .page-navigation li {
+            display: flex;
+        }
+
+        @media (width >=768px) {
+            .main-navigation > .page-navigation {
+                display: flex;
+                gap: 4rem;
+            }
+        }
 
 .bg-img-container{
     max-width: 100%;
+}
+
+.search-container{
+    display: none;
 }
 
 .search-container > i {
     color: var(--main-color);
 }
 
+@media (min-width: 768px) {
+    .search-container {
+        display: flex;
+    }
+}
+
 /*Header end*/
+
+/* Hamburger menu start*/
+.hamburger-container {
+    overflow: hidden;
+    justify-self: flex-end;
+}
+@media (width >=768px) {
+    .hamburger-container {
+        display: none;
+    }
+}
+.hamburger-icon {
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    z-index: 2000;
+}
+
+    .hamburger-icon .bar {
+        padding: 0;
+        width: 30px;
+        background-color: var(--main-color);
+        display: block;
+        border-radius: 4px;
+        transition: all 0.4s ease-in-out;
+        position: absolute;
+    }
+
+.bar1 {
+    height: 3px;
+    top: 0;
+}
+
+.bar2,
+.bar3 {
+    height: 3px;
+    top: 12px;
+}
+
+.bar3 {
+    height: 3px;
+    right: 0;
+}
+
+.bar4 {
+    height: 3px;
+    bottom: 2px;
+}
+
+.hamburger-checkbox:checked + label > .hamburger-icon > .bar1 {
+    transform: translateX(40px);
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.hamburger-checkbox:checked + label > .hamburger-icon > .bar2 {
+    transform: rotate(45deg);
+    overflow: hidden;
+}
+
+.hamburger-checkbox:checked + label > .hamburger-icon > .bar3 {
+    transform: rotate(-45deg);
+    overflow: hidden;
+}
+
+.hamburger-checkbox:checked + label > .hamburger-icon > .bar4 {
+    transform: translateX(-40px);
+    background-color: transparent;
+    overflow: hidden;
+}
+
+
+.expanded-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    width: clamp(200px, 50vw, 320px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3rem;
+    background-color: white;
+    padding: 2rem 1.25rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    z-index: 1000;
+    pointer-events: none;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+    .expanded-nav > .page-navigation {
+        padding-block: 4rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-evenly;
+    }
+
+    .expanded-nav > .page-navigation li{
+        font-size: var(--heading-04-size);
+    }
+
+body.menu-open .expanded-nav {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: var(--main-color-opacity);
+    z-index: 900;
+    opacity: 1;
+    transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
+}
+
+    .menu-overlay[hidden] {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+
+body.menu-open {
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .expandedNav,
+    .menu-overlay,
+    .hamburger .bar {
+        transition: none !important;
+    }
+}
+/* Hamburger menu end*/
+
 
 
 /*Breadcrumb Banner start*/
-.breadcrumb-banner {display: none;}
+.breadcrumb-banner {
+    display: none;
+}
 
 @media (min-width: 768px) {
     .breadcrumb-banner {
@@ -800,7 +961,7 @@ header {
 .about-us-section {
     display: flex;
     flex-direction: column-reverse;
-    padding-inline: var(--pad-responsive-inline);
+    padding-inline: clamp( 0, calc( 1rem + (23.5rem - 1rem) * ((100vw - 380px) / (1920px - 380px)) ), 23.5rem );
     padding-block: 2rem;
     align-items: center;
     gap: 2rem;
@@ -852,6 +1013,10 @@ header {
 }
 
 @media (min-width: 768px) {
+    .about-us-section {
+        padding-inline: var(--pad-responsive-inline);
+    }
+
     .ceo-container{
         display: flex;
         flex-direction: column;
@@ -1483,3 +1648,116 @@ footer {
     .copyright-text .highlight {
         font-size: var(--body-text-size);
     }
+
+
+
+/* Under Construction */
+.under-construction {
+    display: grid;
+    place-items: center;
+    min-height: 60svh;
+    padding: clamp(24px,4vw,48px);
+}
+
+.uc-inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    gap: clamp(16px,2.5vw,24px);
+    max-width: 720px;
+}
+
+.hammer-wrap {
+    position: relative;
+    width: 180px;
+    height: 200px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 8px;
+}
+
+.hammer {
+    display: block;
+    width: 180px;
+    height: 180px;
+    transform: rotate(45deg);
+    overflow: visible;
+}
+
+.hammer-rot {
+    transform-origin: 8px 13px;
+    animation: swing 1.8s cubic-bezier(.22,.7,.25,1) infinite;
+}
+
+.nail {
+    position: absolute;
+    bottom: 8px;
+    right: 45px;
+    width: 48px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--main-color);
+    box-shadow: 0 0 0 2px var(--main-color) inset;
+    animation: nail 1.8s ease-in-out infinite;
+}
+
+.uc-title {
+    margin: 0;
+    color: var(--main-color);
+    font-weight: 700;
+    font-size: clamp(20px,4.2vw,40px);
+    line-height: 1.25;
+}
+
+.uc-sub {
+    margin: 0;
+    color: #535656;
+    font-size: clamp(14px,2.4vw,16px);
+    line-height: 1.6;
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(-8deg) translateY(-8px)
+    }
+
+    35% {
+        transform: rotate(-5deg) translateY(-5px)
+    }
+
+    45% {
+        transform: rotate(-8deg) translateY(-8px)
+    }
+
+    55% {
+        transform: rotate(0deg) translateY(10px) 
+    }
+
+    100% {
+        transform: rotate(-3deg) translateY(5px)
+    }
+}
+
+@keyframes nail {
+    0% {
+        transform: translateY(0)
+    }
+
+    45% {
+        transform: translateY(0)
+    }
+
+    55% {
+        transform: translateY(0)
+    }
+
+    100% {
+        transform: translateY(2px)
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hammer-rot, .nail {
+        animation: none
+    }
+}

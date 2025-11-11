@@ -111,4 +111,31 @@
     }
 
     [questionForm, newsletterForm, callbackForm].forEach(wireForm);
+
+    // ===== Hamburger Menu =====
+    const checkbox = document.getElementById("hamburger-toggle");
+    const overlay = document.querySelector(".menu-overlay");
+    const body = document.body;
+
+    if (checkbox && overlay) {
+        checkbox.addEventListener("change", () => {
+            const active = checkbox.checked;
+            body.classList.toggle("menu-open", active);
+            overlay.hidden = !active;
+        });
+
+        overlay.addEventListener("click", () => {
+            checkbox.checked = false;
+            body.classList.remove("menu-open");
+            overlay.hidden = true;
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && checkbox.checked) {
+                checkbox.checked = false;
+                body.classList.remove("menu-open");
+                overlay.hidden = true;
+            }
+        });
+    }
 });
