@@ -1,3 +1,4 @@
+using CMS.Factory;
 using CMS.Interfaces;
 using CMS.Services;
 
@@ -11,12 +12,22 @@ builder.CreateUmbracoBuilder()
 
 builder.Services.AddScoped<IFormSubmissionsService, FormSubmissionsService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IEmailRequestFactory, EmailRequestFactory>();
 
 builder.Services.AddHttpClient("EmailServiceProvider", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["EmailServiceApi"]!);
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 WebApplication app = builder.Build();
 
