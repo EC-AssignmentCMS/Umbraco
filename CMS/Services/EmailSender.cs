@@ -1,19 +1,18 @@
 ﻿using CMS.Interfaces;
+using CMS.Models;
 
 namespace CMS.Services;
 
-public class EmailSender(IHttpClientFactory httpClientFactory) : IEmailSender
+public class EmailSender(IHttpClientFactory httpClientFactory, IConfiguration config) : IEmailSender
 {
     private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
+    private readonly string _endpoint = config["EmailServiceEndpoints:SendConfirmation"]!;
 
-    public async Task SendConfirmationAsync(string email, string formType)
+    public async Task SendConfirmationAsync(EmailRequestModel payload)
     {
         var client = _httpClientFactory.CreateClient("EmailServiceProvider");
 
-        var payload = new { Email = email, FormType = formType };
-
-        var resp = await client.PostAsJsonAsync("api/Confirmation/send-confirmation-email", payload);
-        resp.EnsureSuccessStatusCode();
+        var response = await client.PostAsJsonAsync(_endpoint, payload);
+        response.EnsureSuccessStatusCode();
     }
-
 }

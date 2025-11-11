@@ -1,7 +1,8 @@
-﻿namespace CMS.Interfaces
+﻿using CMS.Models;
+
+namespace CMS.Interfaces;
+
+public interface IEmailSender
 {
-    public interface IEmailSender
-    {
-        Task SendConfirmationAsync(string email, string formType);
-    }
+    Task SendConfirmationAsync(EmailRequestModel payload);
 }

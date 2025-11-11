@@ -4,12 +4,13 @@ using Umbraco.Cms.Core.Services;
 
 namespace CMS.Services;
 
-public class FormSubmissionsService(IContentService contentService, IEmailSender emailSender) : IFormSubmissionsService
+public class FormSubmissionsService(IContentService contentService, IEmailSender emailSender, IEmailRequestFactory emailRequestFactory) : IFormSubmissionsService
 {
     private readonly IContentService _contentService = contentService;
     private readonly IEmailSender _emailSender = emailSender;
+    private readonly IEmailRequestFactory _emailRequestFactory = emailRequestFactory;
 
-    public bool SaveCallbackRequest(CallbackFormViewModel model)
+    public async Task<bool> SaveCallbackRequest(CallbackFormViewModel model)
     {
         try
         {
@@ -25,7 +26,9 @@ public class FormSubmissionsService(IContentService contentService, IEmailSender
             request.SetValue("callbackRequestPhone", model.Phone);
             request.SetValue("callbackRequestOption", model.SelectedOption);
 
-            //Här ska vi skicka "Confirmation Email"
+
+            var emailRequest = _emailRequestFactory.Create(model);
+            await _emailSender.SendConfirmationAsync(emailRequest);
 
 
             var saveResult = _contentService.Save(request);
@@ -37,7 +40,7 @@ public class FormSubmissionsService(IContentService contentService, IEmailSender
         }
     }
 
-    public bool SaveQuestionRequest(QuestionFormViewModel model)
+    public async Task<bool> SaveQuestionRequest(QuestionFormViewModel model)
     {
         try
         {
@@ -51,7 +54,10 @@ public class FormSubmissionsService(IContentService contentService, IEmailSender
             request.SetValue("questionRequestName", model.Name);
             request.SetValue("questionRequestEmail", model.Email);
             request.SetValue("questionRequestQuestion", model.Question);
-            //Här ska vi skicka "Confirmation Email"
+
+            var emailRequest = _emailRequestFactory.Create(model);
+            await _emailSender.SendConfirmationAsync(emailRequest);
+
             var saveResult = _contentService.Save(request);
             return saveResult.Success;
         }
@@ -61,7 +67,7 @@ public class FormSubmissionsService(IContentService contentService, IEmailSender
         }
     }
 
-    public bool SaveNewsletterRequest(NewsletterViewModel model)
+    public async Task<bool> SaveNewsletterRequest(NewsletterViewModel model)
     {
         try
         {
@@ -73,7 +79,10 @@ public class FormSubmissionsService(IContentService contentService, IEmailSender
             var request = _contentService.Create(requestName, container, "newsletterRequest");
 
             request.SetValue("newsletterRequestEmail", model.NewsletterEmail);
-            //Här ska vi skicka "Confirmation Email"
+
+            var emailRequest = _emailRequestFactory.Create(model);
+            await _emailSender.SendConfirmationAsync(emailRequest);
+
             var saveResult = _contentService.Save(request);
 
             return saveResult.Success;
