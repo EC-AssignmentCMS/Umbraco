@@ -23,14 +23,14 @@ public class FormController(
 {
     private readonly FormSubmissionsService _formSubmissions = formSubmissions;
 
-    public IActionResult HandleCallbackForm(CallbackFormViewModel model)
+    public async Task<IActionResult> HandleCallbackForm(CallbackFormViewModel model)
     {
         if (!ModelState.IsValid)
         {
             return CurrentUmbracoPage();
         }
 
-        var result = _formSubmissions.SaveCallbackRequest(model);
+        var result = await _formSubmissions.SaveCallbackRequest(model);
         if (!result)
         {
             TempData["FormError"] = "Something went wrong while submitting your request. Please try again later.";
@@ -42,14 +42,14 @@ public class FormController(
         return RedirectToCurrentUmbracoPage();
     }
 
-    public IActionResult HandleQuestionForm(QuestionFormViewModel model)
+    public async Task<IActionResult> HandleQuestionForm(QuestionFormViewModel model)
     {
         if (!ModelState.IsValid)
         {
             return CurrentUmbracoPage();
         }
 
-        var result = _formSubmissions.SaveQuestionRequest(model);
+        var result = await _formSubmissions.SaveQuestionRequest(model);
         if (!result)
         {
             TempData["FormError"] = "Something went wrong while submitting your request. Please try again later.";
@@ -62,14 +62,14 @@ public class FormController(
     }
 
 
-    public IActionResult HandleNewsletterForm(NewsletterViewModel model)
+    public async Task<IActionResult> HandleNewsletterForm(NewsletterViewModel model)
     {
         if (!ModelState.IsValid)
         {
             return CurrentUmbracoPage();
         }
 
-        var result = _formSubmissions.SaveNewsletterRequest(model);
+        var result = await _formSubmissions.SaveNewsletterRequest(model);
         if (!result)
         {
             TempData["SignUpError"] = "Error. Please try again later.";

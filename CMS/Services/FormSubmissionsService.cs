@@ -1,13 +1,16 @@
-﻿using CMS.ViewModels;
+﻿using CMS.Interfaces;
+using CMS.ViewModels;
 using Umbraco.Cms.Core.Services;
 
 namespace CMS.Services;
 
-public class FormSubmissionsService(IContentService contentService)
+public class FormSubmissionsService(IContentService contentService, IEmailSender emailSender, IEmailRequestFactory emailRequestFactory) : IFormSubmissionsService
 {
     private readonly IContentService _contentService = contentService;
+    private readonly IEmailSender _emailSender = emailSender;
+    private readonly IEmailRequestFactory _emailRequestFactory = emailRequestFactory;
 
-    public bool SaveCallbackRequest(CallbackFormViewModel model)
+    public async Task<bool> SaveCallbackRequest(CallbackFormViewModel model)
     {
         try
         {
@@ -23,6 +26,11 @@ public class FormSubmissionsService(IContentService contentService)
             request.SetValue("callbackRequestPhone", model.Phone);
             request.SetValue("callbackRequestOption", model.SelectedOption);
 
+
+            var emailRequest = _emailRequestFactory.Create(model);
+            await _emailSender.SendConfirmationAsync(emailRequest);
+
+
             var saveResult = _contentService.Save(request);
             return saveResult.Success;
         }
@@ -32,7 +40,7 @@ public class FormSubmissionsService(IContentService contentService)
         }
     }
 
-    public bool SaveQuestionRequest(QuestionFormViewModel model)
+    public async Task<bool> SaveQuestionRequest(QuestionFormViewModel model)
     {
         try
         {
@@ -47,6 +55,9 @@ public class FormSubmissionsService(IContentService contentService)
             request.SetValue("questionRequestEmail", model.Email);
             request.SetValue("questionRequestQuestion", model.Question);
 
+            var emailRequest = _emailRequestFactory.Create(model);
+            await _emailSender.SendConfirmationAsync(emailRequest);
+
             var saveResult = _contentService.Save(request);
             return saveResult.Success;
         }
@@ -56,7 +67,7 @@ public class FormSubmissionsService(IContentService contentService)
         }
     }
 
-    public bool SaveNewsletterRequest(NewsletterViewModel model)
+    public async Task<bool> SaveNewsletterRequest(NewsletterViewModel model)
     {
         try
         {
@@ -69,7 +80,11 @@ public class FormSubmissionsService(IContentService contentService)
 
             request.SetValue("newsletterRequestEmail", model.NewsletterEmail);
 
+            var emailRequest = _emailRequestFactory.Create(model);
+            await _emailSender.SendConfirmationAsync(emailRequest);
+
             var saveResult = _contentService.Save(request);
+
             return saveResult.Success;
         }
         catch (Exception)
