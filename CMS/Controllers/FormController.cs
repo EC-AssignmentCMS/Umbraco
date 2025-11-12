@@ -1,4 +1,4 @@
-﻿using CMS.Services;
+﻿using CMS.Interfaces;
 using CMS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Umbraco.Cms.Core.Cache;
@@ -12,7 +12,7 @@ using Umbraco.Cms.Web.Website.Controllers;
 namespace CMS.Controllers;
 
 public class FormController(
-    FormSubmissionsService formSubmissions,
+    IFormSubmissionsService formSubmissions,
     IUmbracoContextAccessor umbracoContextAccessor,
     IUmbracoDatabaseFactory databaseFactory,
     ServiceContext services,
@@ -21,7 +21,7 @@ public class FormController(
     IPublishedUrlProvider publishedUrlProvider
     ) : SurfaceController(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
 {
-    private readonly FormSubmissionsService _formSubmissions = formSubmissions;
+    private readonly IFormSubmissionsService _formSubmissions = formSubmissions;
 
     public async Task<IActionResult> HandleCallbackForm(CallbackFormViewModel model)
     {
