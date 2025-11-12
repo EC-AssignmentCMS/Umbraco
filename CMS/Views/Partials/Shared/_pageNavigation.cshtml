@@ -1,0 +1,29 @@
+﻿@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.PublishedCache
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Cms.Core.Services.Navigation
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject IPublishedUrlProvider PublishedUrlProvider
+@inject IVariationContextAccessor VariationContextAccessor
+@inject IPublishedContentCache PublishedContentCache
+@inject IDocumentNavigationQueryService DocumentNavigationQueryService
+@inject IPublishedValueFallback PublishedValueFallback
+
+
+@{
+    var selection = Model.Root().Children().Where(x => x.IsVisible()).ToArray();
+}
+
+@if (selection?.Length > 0)
+{
+    <ul aria-label="Main page navigation" class="page-navigation">
+        @foreach (var item in selection)
+        {
+            <li class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">
+                <a class="nav-link"
+                   href="@item.Url(PublishedUrlProvider)"
+                   data-text="@item.Name">@item.Name</a>
+            </li>
+        }
+    </ul>
+}

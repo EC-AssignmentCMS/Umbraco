@@ -5,24 +5,31 @@
 	Layout = "baseLayout.cshtml";
 }
 
-<section class="service-detail-section">
+@if (Model.Name == "Risk Management")
+{
+    <section class="service-detail-section">
 
-    <aside class="widget">
-        @Html.GetBlockListHtml(Model.Widgets)
-    </aside>
+        <aside class="widget">
+            @Html.GetBlockListHtml(Model.Widgets)
+        </aside>
 
-    <div class="service-detail-content">
-        <div class="hero-image-container">
-            @if (Model.HeroImage != null)
-            {
-                <img src="@Model.HeroImage.Url()" alt="@Model.HeroImageDescription" />
-            }
+        <div class="service-detail-content">
+            <div class="hero-image-container">
+                @if (Model.HeroImage != null)
+                {
+                    <img src="@Model.HeroImage.Url()" alt="@Model.HeroImageDescription" />
+                }
+            </div>
+            <div class="rte">@Html.Raw(Model.BodyText)</div>
         </div>
-        <div class="rte">@Html.Raw(Model.BodyText)</div>
-    </div>
 
-</section>
+    </section>
 
-@Html.GetBlockListHtml(Model.Sections)
+    @Html.GetBlockListHtml(Model.Sections)
 
-<partial name="Partials/Sections/_contactInfo" />
+    <partial name="Partials/Sections/_contactInfo" />
+}
+else
+{
+    <partial name="Partials/Shared/_underConstruction" />
+}
