@@ -7,9 +7,10 @@ public class I18nService : II18nService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IWebHostEnvironment _env;
-    private readonly Dictionary<string, Dictionary<string, JsonElement>> _translations = new();
+    private readonly Dictionary<string, Dictionary<string, string>> _translations = new();
     private const string DefaultLanguage = "sv";
     private const string LanguageCookieName = "lang";
+    private static readonly string[] SupportedLanguages = ["sv", "en"];
 
     public I18nService(IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env)
     {
@@ -23,18 +24,28 @@ public class I18nService : II18nService
         var i18nPath = Path.Combine(_env.WebRootPath, "i18n");
         if (!Directory.Exists(i18nPath)) return;
 
-        foreach (var file in Directory.GetFiles(i18nPath, "*.json"))
+        foreach (var lang in SupportedLanguages)
         {
-            var lang = Path.GetFileNameWithoutExtension(file);
-            var json = File.ReadAllText(file);
-            var doc = JsonDocument.Parse(json);
-            var flatDict = new Dictionary<string, JsonElement>();
-            FlattenJson(doc.RootElement, "", flatDict);
-            _translations[lang] = flatDict;
+            var filePath = Path.Combine(i18nPath, $"{lang}.json");
+            if (!File.Exists(filePath)) continue;
+
+            try
+            {
+                var json = File.ReadAllText(filePath);
+                using var doc = JsonDocument.Parse(json);
+                var flatDict = new Dictionary<string, string>();
+                FlattenJson(doc.RootElement, "", flatDict);
+                _translations[lang] = flatDict;
+            }
+            catch (Exception)
+            {
+                // Log error in production, but don't crash the app
+                continue;
+            }
         }
     }
 
-    private void FlattenJson(JsonElement element, string prefix, Dictionary<string, JsonElement> dict)
+    private void FlattenJson(JsonElement element, string prefix, Dictionary<string, string> dict)
     {
         switch (element.ValueKind)
         {
@@ -45,8 +56,11 @@ public class I18nService : II18nService
                     FlattenJson(prop.Value, newPrefix, dict);
                 }
                 break;
+            case JsonValueKind.String:
+                dict[prefix] = element.GetString() ?? prefix;
+                break;
             default:
-                dict[prefix] = element;
+                dict[prefix] = element.ToString();
                 break;
         }
     }
@@ -59,7 +73,7 @@ public class I18nService : II18nService
         // Check cookie first
         if (context.Request.Cookies.TryGetValue(LanguageCookieName, out var cookieLang) &&
             !string.IsNullOrEmpty(cookieLang) &&
-            _translations.ContainsKey(cookieLang))
+            IsValidLanguage(cookieLang))
         {
             return cookieLang;
         }
@@ -67,12 +81,17 @@ public class I18nService : II18nService
         // Check query string
         if (context.Request.Query.TryGetValue("lang", out var queryLang) &&
             !string.IsNullOrEmpty(queryLang) &&
-            _translations.ContainsKey(queryLang!))
+            IsValidLanguage(queryLang!))
         {
             return queryLang!;
         }
 
         return DefaultLanguage;
+    }
+
+    private static bool IsValidLanguage(string lang)
+    {
+        return SupportedLanguages.Contains(lang, StringComparer.OrdinalIgnoreCase);
     }
 
     public string Translate(string key, string? language = null)
@@ -82,7 +101,7 @@ public class I18nService : II18nService
         if (_translations.TryGetValue(lang, out var langDict) &&
             langDict.TryGetValue(key, out var value))
         {
-            return value.GetString() ?? key;
+            return value;
         }
 
         // Fallback to default language
@@ -90,7 +109,7 @@ public class I18nService : II18nService
             _translations.TryGetValue(DefaultLanguage, out var defaultDict) &&
             defaultDict.TryGetValue(key, out var defaultValue))
         {
-            return defaultValue.GetString() ?? key;
+            return defaultValue;
         }
 
         return key;

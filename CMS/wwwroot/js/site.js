@@ -1,11 +1,21 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
 
     // ===== i18n / Language Handling =====
+    const supportedLanguages = ['sv', 'en'];
     let translations = {};
-    const currentLang = getCookie('lang') || 'sv';
+    const currentLang = getValidLang(getCookie('lang')) || 'sv';
     
+    function getValidLang(lang) {
+        return lang && supportedLanguages.includes(lang) ? lang : null;
+    }
+
     // Load translations for client-side validation
     async function loadTranslations(lang) {
+        // Validate lang is in supported languages to prevent path traversal
+        if (!supportedLanguages.includes(lang)) {
+            console.warn('Unsupported language:', lang);
+            return;
+        }
         try {
             const response = await fetch(`/i18n/${lang}.json`);
             if (response.ok) {
@@ -30,8 +40,15 @@
     }
 
     function getCookie(name) {
-        const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? match[2] : null;
+        // Use safer cookie parsing without regex constructor
+        const cookies = document.cookie.split(';');
+        for (const cookie of cookies) {
+            const [cookieName, cookieValue] = cookie.trim().split('=');
+            if (cookieName === name) {
+                return cookieValue;
+            }
+        }
+        return null;
     }
 
     function setCookie(name, value, days) {
@@ -45,8 +62,11 @@
         languageSelect.value = currentLang;
         languageSelect.addEventListener('change', (e) => {
             const newLang = e.target.value;
-            setCookie('lang', newLang, 365);
-            window.location.reload();
+            // Only set cookie if the language is valid
+            if (supportedLanguages.includes(newLang)) {
+                setCookie('lang', newLang, 365);
+                window.location.reload();
+            }
         });
     }
 
