@@ -717,6 +717,32 @@ header {
     }
 }
 
+.language-selector {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.language-selector select {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: white;
+    color: var(--main-color);
+    font-size: 0.875rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.language-selector select:hover {
+    border-color: var(--main-color);
+}
+
+.language-selector select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(var(--accent-color-rgb), 0.2);
+}
+
 /*Header end*/
 
 /* Hamburger menu start*/

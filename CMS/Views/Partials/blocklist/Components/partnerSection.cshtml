@@ -18,7 +18,7 @@
         @foreach (var partner in partners)
         {
             var logo = partner.PartnerLogoImage;
-            var altText = partner.PartnerName ?? "Partner logo";
+            var altText = partner.PartnerName ?? Html.T("partners.logoAlt");
             var logoUrl = logo?.GetCropUrl() ?? string.Empty;
             <div class="logo-container">
                 @if (!string.IsNullOrEmpty(logoUrl))

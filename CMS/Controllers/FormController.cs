@@ -13,6 +13,7 @@ namespace CMS.Controllers;
 
 public class FormController(
     IFormSubmissionsService formSubmissions,
+    II18nService i18nService,
     IUmbracoContextAccessor umbracoContextAccessor,
     IUmbracoDatabaseFactory databaseFactory,
     ServiceContext services,
@@ -22,6 +23,7 @@ public class FormController(
     ) : SurfaceController(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
 {
     private readonly IFormSubmissionsService _formSubmissions = formSubmissions;
+    private readonly II18nService _i18n = i18nService;
 
     public async Task<IActionResult> HandleCallbackForm(CallbackFormViewModel model)
     {
@@ -33,11 +35,11 @@ public class FormController(
         var result = await _formSubmissions.SaveCallbackRequest(model);
         if (!result)
         {
-            TempData["FormError"] = "Something went wrong while submitting your request. Please try again later.";
+            TempData["FormError"] = _i18n.Translate("forms.messages.formError");
             return RedirectToCurrentUmbracoPage();
         }
 
-        TempData["FormSuccess"] = "Thank you! Your request has been received and we will get back to you soon.";
+        TempData["FormSuccess"] = _i18n.Translate("forms.messages.formSuccess");
 
         return RedirectToCurrentUmbracoPage();
     }
@@ -52,11 +54,11 @@ public class FormController(
         var result = await _formSubmissions.SaveQuestionRequest(model);
         if (!result)
         {
-            TempData["FormError"] = "Something went wrong while submitting your request. Please try again later.";
+            TempData["FormError"] = _i18n.Translate("forms.messages.formError");
             return RedirectToCurrentUmbracoPage();
         }
 
-        TempData["FormSuccess"] = "Thank you! Your request has been received and we will get back to you soon.";
+        TempData["FormSuccess"] = _i18n.Translate("forms.messages.formSuccess");
 
         return RedirectToCurrentUmbracoPage();
     }
@@ -72,11 +74,11 @@ public class FormController(
         var result = await _formSubmissions.SaveNewsletterRequest(model);
         if (!result)
         {
-            TempData["SignUpError"] = "Error. Please try again later.";
+            TempData["SignUpError"] = _i18n.Translate("forms.messages.signUpError");
             return RedirectToCurrentUmbracoPage();
         }
 
-        TempData["SignUpSuccess"] = "Thank you for signing up!";
+        TempData["SignUpSuccess"] = _i18n.Translate("forms.messages.signUpSuccess");
 
         return RedirectToCurrentUmbracoPage();
     }

@@ -7,25 +7,25 @@
     <div class="input-container">
 
         <div class="input-group">
-            <label class="sr-only" asp-for="Name">Full name</label>
-            <input autocomplete="on" id="Name" asp-for="Name" type="text" placeholder="@Html.DisplayNameFor(x => x.Name)" required>
+            <label class="sr-only" asp-for="Name">@Html.T("forms.fullName")</label>
+            <input autocomplete="on" id="Name" asp-for="Name" type="text" placeholder="@Html.T("forms.fullName")" required>
             <span asp-validation-for="Name"></span>
         </div>
 
         <div class="input-group">
-            <label class="sr-only" asp-for="Phone">Phone</label>
-            <input id="Phone" asp-for="Phone" type="text" placeholder="@Html.DisplayNameFor(x => x.Phone)" required>
+            <label class="sr-only" asp-for="Phone">@Html.T("forms.phone")</label>
+            <input id="Phone" asp-for="Phone" type="text" placeholder="@Html.T("forms.phone")" required>
             <span asp-validation-for="Phone"></span>
         </div>
 
         <div class="input-group">
-            <label class="sr-only" asp-for="Email">E-mail Address</label>
-            <input id="Email" asp-for="Email" type="email" placeholder="@Html.DisplayNameFor(x => x.Email)" required>
+            <label class="sr-only" asp-for="Email">@Html.T("forms.emailAddress")</label>
+            <input id="Email" asp-for="Email" type="email" placeholder="@Html.T("forms.emailAddress")" required>
             <span asp-validation-for="Email"></span>
         </div>
 
         <div class="input-group select-wrapper">
-            <label class="sr-only" asp-for="SelectedOption">Select advisor</label>
+            <label class="sr-only" asp-for="SelectedOption">@Html.T("forms.selectAdvisor")</label>
             <select id="SelectedOption" asp-for="SelectedOption" required>
                 @foreach (var option in Model.Options ?? Enumerable.Empty<string>())
                 {
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn-primary">Submit</button>
+    <button type="submit" class="btn-primary">@Html.T("common.submit")</button>
 
     @if (TempData["FormSuccess"] != null)
     {

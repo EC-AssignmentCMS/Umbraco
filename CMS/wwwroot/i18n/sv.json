@@ -1,0 +1,65 @@
+{
+  "common": {
+    "submit": "Skicka",
+    "readMore": "Läs mer",
+    "readOurStory": "Läs vår historia",
+    "contactUs": "Kontakta oss",
+    "home": "Hem",
+    "noAddressFound": "Ingen adress hittades."
+  },
+  "header": {
+    "homePageAriaLabel": "Startsida",
+    "searchAriaLabel": "Sök",
+    "openMainMenu": "Öppna huvudmeny",
+    "mainNavigation": "Huvudnavigering",
+    "languageLabel": "Språk"
+  },
+  "breadcrumb": {
+    "about": "Om oss",
+    "services": "Våra tjänster",
+    "contact": "Kontakta oss"
+  },
+  "contact": {
+    "letUsKnow": "Berätta om ditt nästa projekt",
+    "officeLocation": "Kontorsadress",
+    "phoneNumber": "Telefonnummer",
+    "emailAddress": "E-postadress"
+  },
+  "forms": {
+    "fullName": "Fullständigt namn",
+    "phone": "Telefon",
+    "emailAddress": "E-postadress",
+    "selectAdvisor": "Välj rådgivare",
+    "question": "Fråga",
+    "validation": {
+      "nameRequired": "Namn är obligatoriskt",
+      "emailRequired": "E-post är obligatoriskt",
+      "emailInvalid": "Ange en giltig e-postadress",
+      "phoneRequired": "Telefonnummer är obligatoriskt",
+      "selectOption": "Du måste välja ett alternativ",
+      "questionRequired": "Ange en fråga"
+    },
+    "messages": {
+      "formSuccess": "Tack! Din förfrågan har mottagits och vi återkommer snart.",
+      "formError": "Något gick fel vid inskickning. Försök igen senare.",
+      "signUpSuccess": "Tack för att du registrerar dig!",
+      "signUpError": "Fel. Försök igen senare."
+    }
+  },
+  "successStories": {
+    "title": "FRAMGÅNGSHISTORIER",
+    "subtitle": "Framgångshistoria",
+    "imageAlt": "Framgångsbild"
+  },
+  "underConstruction": {
+    "title": "Den här sidan är under konstruktion",
+    "subtitle": "Vi bygger något fantastiskt. Kom tillbaka snart."
+  },
+  "about": {
+    "ceoImageAlt": "Bild på Onatrix VD",
+    "employeeImageAlt": "Bild på Onatrix-anställd"
+  },
+  "partners": {
+    "logoAlt": "Partnerlogotyp"
+  }
+}

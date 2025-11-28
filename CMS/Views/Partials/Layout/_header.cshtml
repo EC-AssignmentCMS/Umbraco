@@ -7,9 +7,10 @@
         .DescendantsOrSelf<SiteSettings>()
         .FirstOrDefault();
 
-    var address = siteSettings?.Address ?? "No address found.";
+    var address = siteSettings?.Address ?? Html.T("common.noAddressFound");
     var logoImg = siteSettings?.LogoImage;
     var socials = new BlockListModel(siteSettings?.Value<IList<BlockListItem>>("socialMediaPlatformList") ?? new List<BlockListItem>());
+    var currentLang = Html.CurrentLang();
 }
 
 <header>
@@ -36,7 +37,7 @@
     </nav>
     <nav class="main-navigation">
 
-        <a class="logo-link" aria-label="Home page" href="@Model.Root()?.Url()">
+        <a class="logo-link" aria-label="@Html.T("header.homePageAriaLabel")" href="@Model.Root()?.Url()">
             @if (logoImg != null)
             {
                 <img src="@logoImg.Url()" alt="@logoImg.Name" />
@@ -51,7 +52,22 @@
         <partial name="Partials/Shared/_pageNavigation" />
 
         <div class="search-container">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-magnifying-glass" aria-label="@Html.T("header.searchAriaLabel")"></i>
+        </div>
+
+        <div class="language-selector">
+            <select id="language-select" aria-label="@Html.T("header.languageLabel")">
+                @if (currentLang == "sv")
+                {
+                    <option value="sv" selected>Svenska</option>
+                    <option value="en">English</option>
+                }
+                else
+                {
+                    <option value="sv">Svenska</option>
+                    <option value="en" selected>English</option>
+                }
+            </select>
         </div>
 
         <partial name="Partials/Shared/_hamburgerMenu" />

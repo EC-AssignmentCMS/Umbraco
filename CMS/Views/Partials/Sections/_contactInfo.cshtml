@@ -27,11 +27,11 @@
 
     <div class="info-container">
 
-        <h4>Let us know about your next project</h4>
+        <h4>@Html.T("contact.letUsKnow")</h4>
 
         <div class="inner-info-container">
             <i class="fa-solid fa-location-dot"></i>
-            <h3 class="info-heading location">Office location</h3>
+            <h3 class="info-heading location">@Html.T("contact.officeLocation")</h3>
             @if (!string.IsNullOrWhiteSpace(address))
             {
                 <a href="https://www.google.com/maps/search/@address" target="_blank">@address</a>
@@ -40,7 +40,7 @@
 
         <div class="inner-info-container">
             <i class="fa-solid fa-phone"></i>
-            <h3 class="info-heading phone">Phone number</h3>
+            <h3 class="info-heading phone">@Html.T("contact.phoneNumber")</h3>
             @if (!string.IsNullOrWhiteSpace(phone))
             {
                 <a href="tel:@phone">@phone</a>
@@ -49,7 +49,7 @@
 
         <div class="inner-info-container">
             <i class="fa-solid fa-envelope"></i>
-            <h3 class="info-heading email">E-mail address</h3>
+            <h3 class="info-heading email">@Html.T("contact.emailAddress")</h3>
             @if (!string.IsNullOrWhiteSpace(email))
             {
                 <a href="mailto:@email">@email</a>
