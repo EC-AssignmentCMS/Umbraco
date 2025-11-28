@@ -16,7 +16,7 @@
 
 @if (selection?.Length > 0)
 {
-    <ul aria-label="Main page navigation" class="page-navigation">
+    <ul aria-label="@Html.T("header.mainNavigation")" class="page-navigation">
         @foreach (var item in selection)
         {
             <li class="@(item.IsAncestorOrSelf(Model) ? "current" : null)">

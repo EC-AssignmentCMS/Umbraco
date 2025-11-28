@@ -10,6 +10,8 @@ builder.CreateUmbracoBuilder()
     .AddComposers()
     .Build();
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<II18nService, I18nService>();
 builder.Services.AddScoped<IFormSubmissionsService, FormSubmissionsService>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddScoped<IEmailRequestFactory, EmailRequestFactory>();

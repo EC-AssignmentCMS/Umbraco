@@ -5,8 +5,8 @@
 @using (Html.BeginUmbracoForm<FormController>(nameof(FormController.HandleNewsletterForm), FormMethod.Post, new { novalidate = "novalidate", id = "newsletterForm" }))
 {
     <div class="input-group">
-        <label class="sr-only" asp-for="NewsletterEmail">E-mail Address</label>
-        <input id="NewsletterEmail" asp-for="NewsletterEmail" type="email" placeholder="@Html.DisplayNameFor(x => x.NewsletterEmail)" required>
+        <label class="sr-only" asp-for="NewsletterEmail">@Html.T("forms.emailAddress")</label>
+        <input id="NewsletterEmail" asp-for="NewsletterEmail" type="email" placeholder="@Html.T("forms.emailAddress")" required>
         <span asp-validation-for="NewsletterEmail"></span>
 
         <button type="submit" class="btn-primary email"></button>

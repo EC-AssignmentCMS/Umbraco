@@ -1,5 +1,78 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
 
+    // ===== i18n / Language Handling =====
+    const supportedLanguages = ['sv', 'en'];
+    let translations = {};
+    const currentLang = getValidLang(getCookie('lang')) || 'sv';
+    
+    function getValidLang(lang) {
+        return lang && supportedLanguages.includes(lang) ? lang : null;
+    }
+
+    // Load translations for client-side validation
+    async function loadTranslations(lang) {
+        // Validate lang is in supported languages to prevent path traversal
+        if (!supportedLanguages.includes(lang)) {
+            console.warn('Unsupported language:', lang);
+            return;
+        }
+        try {
+            const response = await fetch(`/i18n/${lang}.json`);
+            if (response.ok) {
+                translations = await response.json();
+            }
+        } catch (e) {
+            console.warn('Could not load translations:', e);
+        }
+    }
+
+    function getTranslation(key) {
+        const keys = key.split('.');
+        let value = translations;
+        for (const k of keys) {
+            if (value && typeof value === 'object' && k in value) {
+                value = value[k];
+            } else {
+                return key;
+            }
+        }
+        return typeof value === 'string' ? value : key;
+    }
+
+    function getCookie(name) {
+        // Use safer cookie parsing without regex constructor
+        const cookies = document.cookie.split(';');
+        for (const cookie of cookies) {
+            const [cookieName, cookieValue] = cookie.trim().split('=');
+            if (cookieName === name) {
+                return cookieValue;
+            }
+        }
+        return null;
+    }
+
+    function setCookie(name, value, days) {
+        const expires = new Date(Date.now() + days * 864e5).toUTCString();
+        document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Lax`;
+    }
+
+    // Language selector
+    const languageSelect = document.getElementById('language-select');
+    if (languageSelect) {
+        languageSelect.value = currentLang;
+        languageSelect.addEventListener('change', (e) => {
+            const newLang = e.target.value;
+            // Only set cookie if the language is valid
+            if (supportedLanguages.includes(newLang)) {
+                setCookie('lang', newLang, 365);
+                window.location.reload();
+            }
+        });
+    }
+
+    // Load translations on page load
+    loadTranslations(currentLang);
+
     // ===== Footer Copyright Highlighting =====
     document.querySelectorAll(".copyright-text").forEach(p => {
         const words = p.innerHTML.trim().split(" ");
@@ -29,15 +102,17 @@
 
     const emailRegex = /^(?!\.)[A-Za-z0-9._%+-]+(?<!\.)@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
-    // Per-field validators (id -> validator)
-    const validators = {
-        Name: value => value.trim().length >= 2 || "Name is required",
-        Phone: value => value.trim().length >= 2 || "Phone number is required",
-        Email: value => emailRegex.test(value.trim()) || "Please enter a valid email address",
-        NewsletterEmail: value => emailRegex.test(value.trim()) || "Please enter a valid email address",
-        Question: value => value.trim().length > 0 || "Please enter a question",
-        SelectedOption: value => value && value.trim().length > 0 || "You must select an option"
-    };
+    // Per-field validators (id -> validator function returning true or error message)
+    function getValidators() {
+        return {
+            Name: value => value.trim().length >= 2 || getTranslation('forms.validation.nameRequired'),
+            Phone: value => value.trim().length >= 2 || getTranslation('forms.validation.phoneRequired'),
+            Email: value => emailRegex.test(value.trim()) || getTranslation('forms.validation.emailInvalid'),
+            NewsletterEmail: value => emailRegex.test(value.trim()) || getTranslation('forms.validation.emailInvalid'),
+            Question: value => value.trim().length > 0 || getTranslation('forms.validation.questionRequired'),
+            SelectedOption: value => value && value.trim().length > 0 || getTranslation('forms.validation.selectOption')
+        };
+    }
 
     // Find (or create) a validation span that MVC/Unobtrusive expects.
     function getErrorSpan(input) {
@@ -49,7 +124,7 @@
             span = document.createElement('span');
             span.setAttribute('data-valmsg-for', input.id);
             span.setAttribute('data-valmsg-replace', 'true');
-            span.classList.add('field-validation-valid'); // startläge = "valid", dvs reserverar höjd men osynligt via CSS
+            span.classList.add('field-validation-valid');
             wrapper.appendChild(span);
         }
         return span;
@@ -61,7 +136,6 @@
         span.classList.remove('field-validation-valid');
         span.classList.add('field-validation-error');
 
-        // Visuell markering av fältet
         input.style.borderColor = 'var(--color-error)';
         input.setAttribute('aria-invalid', 'true');
     }
@@ -79,6 +153,7 @@
     function validateField(input) {
         const id = input.id;
         const value = input.value;
+        const validators = getValidators();
         const validator = validators[id];
         if (!validator) return true;
 

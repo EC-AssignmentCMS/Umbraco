@@ -7,27 +7,27 @@
     <div class="input-container">
 
         <div class="input-group">
-            <label class="sr-only" asp-for="Name">Full name</label>
-            <input id="Name" asp-for="Name" type="text" placeholder="@Html.DisplayNameFor(x => x.Name)" required>
+            <label class="sr-only" asp-for="Name">@Html.T("forms.fullName")</label>
+            <input id="Name" asp-for="Name" type="text" placeholder="@Html.T("forms.fullName")" required>
             <span asp-validation-for="Name"></span>
         </div>
 
         <div class="input-group">
-            <label class="sr-only" asp-for="Email">E-mail Address</label>
-            <input id="Email" asp-for="Email" type="email" placeholder="@Html.DisplayNameFor(x => x.Email)" required>
+            <label class="sr-only" asp-for="Email">@Html.T("forms.emailAddress")</label>
+            <input id="Email" asp-for="Email" type="email" placeholder="@Html.T("forms.emailAddress")" required>
             <span asp-validation-for="Email"></span>
         </div>
 
 
         <div class="input-group">
-            <label class="sr-only" asp-for="Question">Question</label>
-            <textarea id="Question" asp-for="Question" type="text" placeholder="@Html.DisplayNameFor(x => x.Question)" required></textarea>
+            <label class="sr-only" asp-for="Question">@Html.T("forms.question")</label>
+            <textarea id="Question" asp-for="Question" type="text" placeholder="@Html.T("forms.question")" required></textarea>
             <span asp-validation-for="Question"></span>
         </div>
 
     </div>
 
-    <button type="submit" class="btn-primary">Submit</button>
+    <button type="submit" class="btn-primary">@Html.T("common.submit")</button>
 
     @if (TempData["FormSuccess"] != null)
     {

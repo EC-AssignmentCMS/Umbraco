@@ -18,7 +18,7 @@
     @if (showImg)
     {
         <div class="about-trust-img-c">
-            <img src="@content.AboutTrustImg!.Url()" alt="Image of Onatrix employee" loading="lazy" />
+            <img src="@content.AboutTrustImg!.Url()" alt="@Html.T("about.employeeImageAlt")" loading="lazy" />
         </div>
     }
 </section>

@@ -1,0 +1,65 @@
+{
+  "common": {
+    "submit": "Submit",
+    "readMore": "Read more",
+    "readOurStory": "Read our story",
+    "contactUs": "Contact us",
+    "home": "Home",
+    "noAddressFound": "No address found."
+  },
+  "header": {
+    "homePageAriaLabel": "Home page",
+    "searchAriaLabel": "Search",
+    "openMainMenu": "Open main menu",
+    "mainNavigation": "Main navigation",
+    "languageLabel": "Language"
+  },
+  "breadcrumb": {
+    "about": "About Us",
+    "services": "Our Services",
+    "contact": "Contact Us"
+  },
+  "contact": {
+    "letUsKnow": "Let us know about your next project",
+    "officeLocation": "Office location",
+    "phoneNumber": "Phone number",
+    "emailAddress": "E-mail address"
+  },
+  "forms": {
+    "fullName": "Full name",
+    "phone": "Phone",
+    "emailAddress": "E-mail address",
+    "selectAdvisor": "Select advisor",
+    "question": "Question",
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "phoneRequired": "Phone number is required",
+      "selectOption": "You must select an option",
+      "questionRequired": "Please enter a question"
+    },
+    "messages": {
+      "formSuccess": "Thank you! Your request has been received and we will get back to you soon.",
+      "formError": "Something went wrong while submitting your request. Please try again later.",
+      "signUpSuccess": "Thank you for signing up!",
+      "signUpError": "Error. Please try again later."
+    }
+  },
+  "successStories": {
+    "title": "SUCCESS STORIES",
+    "subtitle": "Success story",
+    "imageAlt": "Success image"
+  },
+  "underConstruction": {
+    "title": "This page is under construction",
+    "subtitle": "We're building something great. Please check back soon."
+  },
+  "about": {
+    "ceoImageAlt": "Image of Onatrix CEO",
+    "employeeImageAlt": "Image of Onatrix employee"
+  },
+  "partners": {
+    "logoAlt": "Partner logo"
+  }
+}

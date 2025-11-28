@@ -21,7 +21,7 @@
     {
         <div class="ceo-container">
             <div class="ceo-img-container">
-                <img src="@content.AboutUsImage!.Url()" alt="Image of Onatrix CEO" loading="lazy" />
+                <img src="@content.AboutUsImage!.Url()" alt="@Html.T("about.ceoImageAlt")" loading="lazy" />
             </div>
             @if (!string.IsNullOrWhiteSpace(content.AboutUsSignature))
             {

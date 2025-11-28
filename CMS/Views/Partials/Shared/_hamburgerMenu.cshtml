@@ -1,6 +1,6 @@
 ﻿<div class="hamburger-container">
     <input type="checkbox" id="hamburger-toggle" class="hamburger-checkbox sr-only" />
-    <label for="hamburger-toggle" class="hamburger-btn" aria-label="Open main menu">
+    <label for="hamburger-toggle" class="hamburger-btn" aria-label="@Html.T("header.openMainMenu")">
         <div class="hamburger-icon">
             <span class="bar bar1"></span>
             <span class="bar bar2"></span>
@@ -9,7 +9,7 @@
         </div>
     </label>
 
-    <nav id="main-menu" class="expanded-nav" aria-label="Main menu">
+    <nav id="main-menu" class="expanded-nav" aria-label="@Html.T("header.mainNavigation")">
 
         <partial name="Partials/Shared/_pageNavigation" />
 

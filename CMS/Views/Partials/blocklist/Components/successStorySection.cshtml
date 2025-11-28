@@ -17,8 +17,8 @@
 <section class="success-section">
 
     <article>
-        <h3 class="highlight">SUCCESS STORIES</h3>
-        <h4>Success story</h4>
+        <h3 class="highlight">@Html.T("successStories.title")</h3>
+        <h4>@Html.T("successStories.subtitle")</h4>
         <div class="story-container">
             @for (int i = 0; i < stories.Count && i < 3; i++)
             {
@@ -35,7 +35,7 @@
         <div class="success-img-container">
             @if (!string.IsNullOrEmpty(imgUrl))
             {
-                <img src="@imgUrl" alt="Success image"/>
+                <img src="@imgUrl" alt="@Html.T("successStories.imageAlt")"/>
             }
         </div>
     </article>

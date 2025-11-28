@@ -10,9 +10,9 @@
     var selection = Model.Ancestors().ToArray();
     var heading = (Model.Name?.Trim().ToLowerInvariant()) switch
     {
-        "about" => "About Us",
-        "services" => "Our Services",
-        "contact" => "Contact Us",
+        "about" => Html.T("breadcrumb.about"),
+        "services" => Html.T("breadcrumb.services"),
+        "contact" => Html.T("breadcrumb.contact"),
         _ => Model.Name
     };
 }
